@@ -58,6 +58,22 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 
 ![Me at Creative Orange Hackathon](hackathon_photo.jpg)
 
+*This project was developed as part of the Creative Orange Hackathon, showcasing an AI-powered clinical decision-support system for hypertension guidelines. The system retrieves evidence from major medical guidelines (WHO, ESC, USPSTF, CDC) using BM25 sparse retrieval on a deduplicated corpus, and generates grounded, citation-verified answers using Google Gemini Flash Lite.*
+
+*Key achievements:*
+- **Faithfulness 5.0/5** – zero hallucination across 200 evaluated answers
+- **Correctness 4.84/5** – high-quality grounded responses  
+- **hit@5 94.5%** retrieval accuracy on deduplicated corpus
+- **~2 ms/query** latency for real-time clinical assistance
+
+*Technical highlights:*
+- Deduplication (813→435 chunks) was the single biggest improvement (+17.5 pts hit@1)
+- BM25 over dense/hybrid/reranker variants – best performance at minimal cost
+- Grounding-first generation: refuses on missing evidence, never fabricates
+- Deployed live on Hugging Face Spaces (Gradio + ZeroGPU)
+
+*Value proposition:* Clinicians get instant, evidence-backed hypertension guidance at point-of-care, with verifiable sources and zero hallucination – addressing the critical need for trustworthy AI in clinical decision support.
+
 ---
 
 ## 🚀 Quick Start

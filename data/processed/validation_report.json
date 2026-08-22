@@ -1,0 +1,145 @@
+{
+  "total_chunks": 36,
+  "error_count": 0,
+  "warning_count": 0,
+  "issues": [
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_001_c002",
+      "message": "~446 chars (~112 tokens, 19% of the smaller neighboring chunk) shared between tail of 'who_001_section_001_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_002_c002",
+      "message": "~303 chars (~76 tokens, 13% of the smaller neighboring chunk) shared between tail of 'who_001_section_002_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_002_c003",
+      "message": "~415 chars (~104 tokens, 17% of the smaller neighboring chunk) shared between tail of 'who_001_section_002_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_002_c004",
+      "message": "~366 chars (~92 tokens, 18% of the smaller neighboring chunk) shared between tail of 'who_001_section_002_c003' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_004_c002",
+      "message": "~426 chars (~106 tokens, 18% of the smaller neighboring chunk) shared between tail of 'who_001_section_004_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_004_c003",
+      "message": "~294 chars (~74 tokens, 18% of the smaller neighboring chunk) shared between tail of 'who_001_section_004_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_006_c002",
+      "message": "~346 chars (~86 tokens, 14% of the smaller neighboring chunk) shared between tail of 'who_001_section_006_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_006_c003",
+      "message": "~317 chars (~79 tokens, 13% of the smaller neighboring chunk) shared between tail of 'who_001_section_006_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_007_c002",
+      "message": "~342 chars (~86 tokens, 14% of the smaller neighboring chunk) shared between tail of 'who_001_section_007_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_007_c003",
+      "message": "~387 chars (~97 tokens, 16% of the smaller neighboring chunk) shared between tail of 'who_001_section_007_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_007_c004",
+      "message": "~363 chars (~91 tokens, 15% of the smaller neighboring chunk) shared between tail of 'who_001_section_007_c003' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_007_c005",
+      "message": "~406 chars (~102 tokens, 22% of the smaller neighboring chunk) shared between tail of 'who_001_section_007_c004' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_009_c002",
+      "message": "~377 chars (~94 tokens, 16% of the smaller neighboring chunk) shared between tail of 'who_001_section_009_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_009_c003",
+      "message": "~410 chars (~102 tokens, 22% of the smaller neighboring chunk) shared between tail of 'who_001_section_009_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_010_c002",
+      "message": "~309 chars (~77 tokens, 13% of the smaller neighboring chunk) shared between tail of 'who_001_section_010_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_010_c003",
+      "message": "~362 chars (~90 tokens, 16% of the smaller neighboring chunk) shared between tail of 'who_001_section_010_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_011_c002",
+      "message": "~329 chars (~82 tokens, 14% of the smaller neighboring chunk) shared between tail of 'who_001_section_011_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_011_c003",
+      "message": "~328 chars (~82 tokens, 14% of the smaller neighboring chunk) shared between tail of 'who_001_section_011_c002' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_011_c004",
+      "message": "~267 chars (~67 tokens, 11% of the smaller neighboring chunk) shared between tail of 'who_001_section_011_c003' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_011_c005",
+      "message": "~434 chars (~108 tokens, 18% of the smaller neighboring chunk) shared between tail of 'who_001_section_011_c004' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_011_c006",
+      "message": "~440 chars (~110 tokens, 22% of the smaller neighboring chunk) shared between tail of 'who_001_section_011_c005' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_013_c002",
+      "message": "~284 chars (~71 tokens, 12% of the smaller neighboring chunk) shared between tail of 'who_001_section_013_c001' and head of this chunk"
+    },
+    {
+      "level": "INFO",
+      "check": "measured_overlap",
+      "chunk_id": "who_001_section_013_c003",
+      "message": "~300 chars (~75 tokens, 17% of the smaller neighboring chunk) shared between tail of 'who_001_section_013_c002' and head of this chunk"
+    }
+  ]
+}

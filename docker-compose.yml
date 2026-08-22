@@ -1,0 +1,11 @@
+services:
+  rag:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PORT=8000
+    volumes:
+      - ./data:/app/data          # persists uploads + qdrant + regenerated artifacts
+    restart: unless-stopped

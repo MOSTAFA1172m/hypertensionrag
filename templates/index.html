@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hypertension Clinical Assistant</title>
+  <meta name="description" content="AI-powered hypertension guidelines assistant grounded in WHO, NICE, ACC/AHA, and USPSTF evidence." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:             #f0f4f8;
+      --surface:        #ffffff;
+      --surface-2:      #f8fafc;
+      --surface-3:      #eef2f7;
+      --border:         #dde3ed;
+      --navy:           #1a3a5c;
+      --navy-light:     #2c5282;
+      --navy-dark:      #112540;
+      --teal:           #0891b2;
+      --teal-bg:        #e0f2fe;
+      --teal-border:    #bae6fd;
+      --text:           #1e2d3d;
+      --text-muted:     #64748b;
+      --text-light:     #94a3b8;
+      --success:        #059669;
+      --success-bg:     #d1fae5;
+      --success-border: #a7f3d0;
+      --error:          #dc2626;
+      --error-bg:       #fee2e2;
+      --chip-bg:        #e8f4f8;
+      --chip-text:      #0e7490;
+      --chip-border:    #bae6fd;
+      --sidebar-w:      256px;
+      --pdf-w:          440px;
+      --radius:         10px;
+      --radius-sm:      6px;
+      --radius-lg:      14px;
+      --shadow-sm:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg:      0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+    }
+    html { font-size: 15px; }
+    body {
+      font-family: "Inter", -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════════════════════════════════════
+       LEFT SIDEBAR
+    ══════════════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--navy-dark);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+      transition: width 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    /* Collapsed sidebar — slides away */
+    body.sidebar-collapsed .sidebar { width: 0; }
+    body.sidebar-collapsed .sidebar > * { opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+
+    /* Sidebar toggle button — lives in topbar */
+    .btn-sidebar-toggle {
+      width: 32px; height: 32px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: all 0.15s;
+      color: var(--text-muted);
+      margin-right: 10px;
+    }
+    .btn-sidebar-toggle:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* Brand */
+    .sidebar-brand {
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-brand-icon {
+      width: 32px; height: 32px;
+      background: var(--teal);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .sidebar-brand-text { line-height: 1.2; }
+    .sidebar-brand-name { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+    .sidebar-brand-sub  { font-size: 10px; color: rgba(255,255,255,0.45); }
+
+    /* New Chat button */
+    .btn-new-chat {
+      margin: 12px 12px 8px;
+      padding: 9px 14px;
+      background: rgba(8,145,178,0.18);
+      border: 1px solid rgba(8,145,178,0.35);
+      border-radius: var(--radius-sm);
+      color: #7dd3ee;
+      font-size: 12.5px; font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.18s;
+      font-family: inherit;
+      width: calc(100% - 24px);
+    }
+    .btn-new-chat:hover { background: rgba(8,145,178,0.32); color: #fff; border-color: var(--teal); }
+    .btn-new-chat svg { flex-shrink: 0; }
+
+    /* Chat list label */
+    .chat-list-label {
+      padding: 10px 16px 4px;
+      font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* Chat list */
+    .chat-list {
+      flex: 1; overflow-y: auto; padding: 4px 8px 8px;
+    }
+    .chat-list::-webkit-scrollbar { width: 4px; }
+    .chat-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 999px; }
+
+    .chat-group-label {
+      padding: 8px 8px 4px;
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .chat-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.14s;
+      margin-bottom: 1px;
+      position: relative;
+    }
+    .chat-item:hover { background: rgba(255,255,255,0.07); }
+    .chat-item.active { background: rgba(8,145,178,0.2); }
+    .chat-item-icon {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+    }
+    .chat-item.active .chat-item-icon { background: rgba(8,145,178,0.4); }
+    .chat-item-info { flex: 1; overflow: hidden; }
+    .chat-item-title {
+      font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .chat-item.active .chat-item-title { color: #fff; }
+    .chat-item-date { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+    .chat-item-del {
+      opacity: 0; position: absolute; right: 6px;
+      background: rgba(220,38,38,0.2); border: none;
+      color: rgba(255,100,100,0.8);
+      width: 20px; height: 20px; border-radius: 4px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; transition: all 0.14s; font-family: inherit;
+    }
+    .chat-item:hover .chat-item-del { opacity: 1; }
+    .chat-item-del:hover { background: rgba(220,38,38,0.5); color: #fff; }
+
+    /* Sidebar bottom — upload button */
+    .sidebar-footer {
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .btn-upload-sidebar {
+      width: 100%; padding: 9px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: rgba(255,255,255,0.6);
+      font-size: 12px; font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.18s; font-family: inherit;
+    }
+    .btn-upload-sidebar:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════
+       MAIN AREA (right of sidebar)
+    ══════════════════════════════════════ */
+    .main-area {
+      flex: 1; display: flex; flex-direction: column;
+      height: 100vh; overflow: hidden; min-width: 0;
+    }
+
+    /* Topbar (simplified — just guidelines) */
+    .topbar {
+      height: 50px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 22px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-left { display: flex; align-items: center; gap: 8px; }
+    .topbar-label { font-size: 11px; color: var(--text-light); font-weight: 500; }
+    .guideline-badges { display: flex; align-items: center; gap: 6px; }
+    .badge-guideline {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 11px; font-weight: 500;
+      padding: 3px 9px; border-radius: 999px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+
+    /* ══════════════════════════════════════
+       APP SHELL (below topbar)
+    ══════════════════════════════════════ */
+    .app-shell {
+      flex: 1; display: flex; position: relative;
+      height: calc(100vh - 50px); overflow: hidden;
+    }
+
+    /* ── Chat column ── */
+    .chat-col {
+      flex: 1; display: flex; flex-direction: column;
+      height: 100%; overflow: hidden; min-width: 0;
+      transition: margin-right 0.3s ease;
+    }
+    .app-shell.pdf-open .chat-col { margin-right: var(--pdf-w); }
+
+    /* Messages area */
+    .messages-area {
+      flex: 1; overflow-y: auto; padding: 24px 0 10px;
+      scroll-behavior: smooth;
+    }
+    .messages-inner { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+    /* Welcome state */
+    .welcome-state { text-align: center; padding: 40px 20px 20px; }
+    .welcome-icon {
+      width: 52px; height: 52px; background: var(--navy);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .welcome-eyebrow { font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 7px; }
+    .welcome-state h1 { font-size: 22px; font-weight: 700; color: var(--navy); font-family: "Lora", serif; letter-spacing: -0.3px; margin-bottom: 7px; }
+    .welcome-state p { color: var(--text-muted); font-size: 13px; line-height: 1.65; max-width: 480px; margin: 0 auto 26px; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
+    .suggestion-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text);
+      font-size: 12px; font-weight: 500; padding: 7px 13px;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+      text-align: left; line-height: 1.3; box-shadow: var(--shadow-sm);
+    }
+    .suggestion-chip:hover { border-color: var(--teal-border); background: var(--teal-bg); color: var(--teal); box-shadow: var(--shadow-md); }
+
+    /* Message groups */
+    .message-group { margin-bottom: 20px; animation: msgIn 0.25s ease; }
+    @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .user-bubble-wrap { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+    .user-bubble {
+      background: var(--navy); color: #fff;
+      border-radius: 18px 18px 4px 18px;
+      padding: 10px 15px; font-size: 14px; line-height: 1.6;
+      max-width: 82%; box-shadow: var(--shadow-sm);
+    }
+
+    .assistant-wrap { display: flex; align-items: flex-start; gap: 9px; }
+    .assistant-avatar {
+      width: 28px; height: 28px; background: var(--navy);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .assistant-body { flex: 1; min-width: 0; }
+
+    .answer-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px 16px 16px 16px;
+      overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 8px;
+    }
+    .answer-card-hdr {
+      padding: 8px 15px; background: #f7feff;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .answer-hdr-icon {
+      width: 17px; height: 17px; background: var(--teal-bg);
+      border: 1px solid var(--teal-border); border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .answer-hdr-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--teal); }
+    .answer-card-body { padding: 14px 17px; }
+    .answer-body { font-size: 14px; line-height: 1.8; color: var(--text); }
+    .answer-body p { margin-bottom: 9px; }
+    .answer-body p:last-child { margin-bottom: 0; }
+    .answer-body ul, .answer-body ol { margin: 7px 0 10px 22px; }
+    .answer-body li { margin-bottom: 5px; }
+    .answer-body strong { color: var(--navy); font-weight: 600; }
+    .answer-body h3 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin: 11px 0 4px; }
+
+    /* Citation badges */
+    .cit {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--teal-bg); color: var(--teal);
+      border: 1px solid var(--teal-border); border-radius: 5px;
+      font-size: 10px; font-weight: 700; padding: 0 5px; margin: 0 2px;
+      cursor: pointer; vertical-align: baseline; transition: all 0.15s; position: relative;
+    }
+    .cit:hover { background: var(--teal); color: #fff; transform: translateY(-1px); }
+    .cit-pop {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); width: 285px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 10px 12px;
+      box-shadow: var(--shadow-lg); z-index: 300;
+      pointer-events: none; opacity: 0; display: none;
+      color: var(--text); font-weight: normal; text-align: left;
+    }
+    .cit-pop::after {
+      content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      border-width: 6px; border-style: solid;
+      border-color: var(--surface) transparent transparent transparent;
+    }
+    .cit:hover .cit-pop { display: block; opacity: 1; }
+    .cit-pop-head { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+    .cit-pop-title { font-size: 11.5px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+    .cit-pop-quote { font-size: 11px; color: var(--text-muted); line-height: 1.5; background: var(--surface-2); padding: 5px 7px; border-radius: 5px; border-left: 2.5px solid var(--teal); margin-bottom: 5px; max-height: 60px; overflow: hidden; }
+    .cit-pop-action { font-size: 10px; color: var(--teal); font-weight: 500; }
+
+    /* Sources */
+    .sources-wrap { margin-top: 0; }
+    .sources-hdr { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+    .sources-grid { display: flex; flex-direction: column; gap: 4px; }
+    .source-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 7px 11px;
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      cursor: pointer; transition: all 0.14s;
+    }
+    .source-card:hover { border-color: var(--teal-border); background: var(--teal-bg); transform: translateX(2px); }
+    .source-left { display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden; }
+    .source-num { width: 19px; height: 19px; border-radius: 5px; background: var(--navy); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .source-info { overflow: hidden; }
+    .source-doc { font-size: 10.5px; font-weight: 600; color: var(--teal); }
+    .source-title { font-size: 11.5px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tag { background: var(--surface-3); color: var(--text-muted); font-size: 10px; padding: 2px 6px; border-radius: 999px; border: 1px solid var(--border); white-space: nowrap; font-weight: 500; }
+
+    /* Typing */
+    .typing-indicator { display: flex; align-items: center; gap: 9px; padding: 4px 0 14px; color: var(--text-muted); font-size: 12.5px; }
+    .typing-dots { display: flex; gap: 4px; }
+    .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); opacity: 0.4; animation: typingBounce 1.2s ease-in-out infinite; }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%,80%,100% { transform: scale(0.7); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+
+    .error-msg { background: var(--error-bg); border: 1px solid #fca5a5; border-radius: var(--radius-sm); color: var(--error); font-size: 13px; padding: 9px 13px; margin-bottom: 10px; }
+
+    /* ── Input bar ── */
+    .input-bar { flex-shrink: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 0 14px; box-shadow: 0 -4px 16px rgba(0,0,0,0.04); }
+    .input-inner { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+    .input-card {
+      background: var(--surface-2); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 9px 11px 9px 15px;
+      display: flex; align-items: flex-end; gap: 9px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-card:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,145,178,0.1); background: var(--surface); }
+    .input-card textarea {
+      flex: 1; background: transparent; border: none; outline: none;
+      font-family: inherit; font-size: 14px; line-height: 1.6; color: var(--text);
+      resize: none; min-height: 22px; max-height: 150px; overflow-y: auto;
+    }
+    .input-card textarea::placeholder { color: var(--text-light); }
+    .btn-send {
+      width: 34px; height: 34px; background: var(--navy); border: none; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      flex-shrink: 0; transition: all 0.18s;
+    }
+    .btn-send:hover:not(:disabled) { background: var(--navy-light); box-shadow: 0 3px 10px rgba(26,58,92,0.3); transform: translateY(-1px); }
+    .btn-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .input-hint { font-size: 11px; color: var(--text-light); margin-top: 6px; text-align: center; }
+    .input-hint kbd { background: var(--surface-3); border: 1px solid var(--border); border-radius: 3px; padding: 0 4px; font-size: 10px; }
+
+    /* ══════════════════════════════════════
+       PDF PANEL
+    ══════════════════════════════════════ */
+    .pdf-panel {
+      position: fixed; top: 0; right: 0;
+      width: var(--pdf-w); height: 100vh;
+      background: #e8ecf0; border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      z-index: 100; box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      min-width: 300px; max-width: 85vw;
+    }
+    .app-shell.pdf-open .pdf-panel { transform: translateX(0); }
+    /* Drag resize handle — left edge of PDF panel */
+    .pdf-resize-handle {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 5px; cursor: col-resize; z-index: 10;
+      background: transparent;
+      transition: background 0.15s;
+    }
+    .pdf-resize-handle:hover,
+    .pdf-resize-handle.dragging { background: var(--teal); }
+    /* During resize, disable text selection and transitions */
+    body.resizing-pdf * { user-select: none !important; }
+    body.resizing-pdf .pdf-panel { transition: none !important; }
+    .pdf-toolbar {
+      height: 48px; background: var(--surface); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 13px; flex-shrink: 0; box-shadow: var(--shadow-sm);
+    }
+    .pdf-close-btn {
+      width: 30px; height: 30px; background: var(--error-bg);
+      border: 1px solid #fca5a5; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: all 0.15s; color: var(--error); font-size: 15px;
+    }
+    .pdf-close-btn:hover { background: var(--error); color: #fff; border-color: var(--error); }
+    .pdf-title-info { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: var(--text); overflow: hidden; flex: 1; min-width: 0; margin: 0 10px; }
+    .pdf-file-icon { width: 20px; height: 20px; background: #fee2e2; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pdf-title-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pdf-controls { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .btn-icon { background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted); width: 27px; height: 27px; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: all 0.14s; font-family: inherit; }
+    .btn-icon:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .toolbar-div { width: 1px; height: 15px; background: var(--border); margin: 0 2px; }
+    .page-wrap { display: flex; align-items: center; gap: 3px; font-size: 11px; color: var(--text-muted); }
+    .page-wrap input { width: 30px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); text-align: center; padding: 2px 0; border-radius: 4px; font-size: 11px; font-family: inherit; outline: none; }
+    .page-wrap input:focus { border-color: var(--teal); }
+    .zoom-lbl { font-size: 10.5px; color: var(--text-muted); min-width: 30px; text-align: center; }
+    .pdf-scroll { flex: 1; overflow: auto; padding: 16px; display: flex; flex-direction: column; align-items: center; }
+    .pdf-page-wrapper { position: relative; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.12); margin-bottom: 14px; border-radius: 2px; }
+    .pdf-page-wrapper canvas { display: block; }
+    .textLayer { position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; opacity: 0.95; line-height: 1.0; }
+    .textLayer span { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0% 0%; }
+    .textLayer span.pdf-highlight {
+      background-color: rgba(234,179,8,0.5) !important;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(202,138,4,0.6) !important;
+      animation: hlPop 0.3s ease;
+    }
+    @keyframes hlPop { 0% { background-color: rgba(250,204,21,0.9); } 100% { background-color: rgba(234,179,8,0.5); } }
+
+    /* ══════════════════════════════════════
+       UPLOAD MODAL
+    ══════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,22,40,0.55); backdrop-filter: blur(5px);
+      z-index: 500; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); width: 100%; max-width: 520px;
+      padding: 26px; box-shadow: var(--shadow-lg); position: relative;
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+    .modal-eyebrow { font-size: 10.5px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+    .modal-title { font-size: 17px; font-weight: 700; color: var(--navy); font-family: "Lora", serif; }
+    .btn-close-modal { background: var(--surface-3); border: 1px solid var(--border); color: var(--text-muted); width: 28px; height: 28px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.14s; margin-top: 2px; }
+    .btn-close-modal:hover { background: var(--error-bg); color: var(--error); border-color: #fca5a5; }
+    .dropzone {
+      border: 2px dashed var(--border); border-radius: var(--radius);
+      background: var(--surface-2); padding: 24px 18px;
+      text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 16px;
+    }
+    .dropzone:hover, .dropzone.dragover { border-color: var(--teal); background: var(--teal-bg); }
+    .dropzone-icon { width: 40px; height: 40px; background: var(--teal-bg); border: 1px solid var(--teal-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 9px; }
+    .dropzone-text { font-size: 13px; color: var(--text); font-weight: 600; margin-bottom: 3px; }
+    .dropzone-sub { font-size: 11px; color: var(--text-muted); }
+    .form-group { margin-bottom: 13px; }
+    .form-group label { display: block; font-size: 10.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input { width: 100%; background: var(--surface-2); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; color: var(--text); font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-group input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,145,178,0.1); background: var(--surface); }
+    .form-group input::placeholder { color: var(--text-light); }
+
+    /* ── Real-time progress UI ── */
+    .progress-panel {
+      display: none;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .progress-panel.active { display: block; }
+
+    /* Progress bar */
+    .progress-bar-wrap { margin-bottom: 12px; }
+    .progress-bar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .progress-bar-label { font-size: 12px; font-weight: 600; color: var(--navy); }
+    .progress-bar-pct { font-size: 12px; font-weight: 700; color: var(--teal); }
+    .progress-track {
+      height: 6px; background: var(--border); border-radius: 999px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--teal) 0%, #06b6d4 100%);
+      border-radius: 999px; width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .progress-fill.indeterminate {
+      width: 40% !important;
+      animation: indeterminate 1.4s ease-in-out infinite;
+    }
+    @keyframes indeterminate {
+      0%   { margin-left: -40%; }
+      100% { margin-left: 110%; }
+    }
+
+    /* Stage steps */
+    .stages-list { display: flex; flex-direction: column; gap: 6px; }
+    .stage-row { display: flex; align-items: center; gap: 9px; }
+    .stage-icon {
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; flex-shrink: 0;
+      background: var(--surface-3); border: 1.5px solid var(--border);
+      color: var(--text-light);
+      transition: all 0.25s;
+    }
+    .stage-icon.done { background: var(--success-bg); border-color: var(--success-border); color: var(--success); }
+    .stage-icon.active { background: var(--teal-bg); border-color: var(--teal-border); color: var(--teal); animation: pulseDot 1s ease-in-out infinite; }
+    .stage-icon.error { background: var(--error-bg); border-color: #fca5a5; color: var(--error); }
+    @keyframes pulseDot { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+    .stage-info { flex: 1; overflow: hidden; }
+    .stage-name { font-size: 11.5px; font-weight: 600; color: var(--text); }
+    .stage-name.active { color: var(--teal); }
+    .stage-name.done  { color: var(--success); }
+    .stage-name.error { color: var(--error); }
+    .stage-detail { font-size: 10.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+
+    /* Rate limit warning */
+    .rate-limit-warn {
+      background: #fef3c7; border: 1px solid #fde68a;
+      border-radius: var(--radius-sm); padding: 7px 10px; margin-top: 8px;
+      font-size: 11px; color: #92400e; display: none; align-items: center; gap: 6px;
+    }
+    .rate-limit-warn.visible { display: flex; }
+
+    .upload-success-box {
+      display: none; background: var(--success-bg); border: 1px solid var(--success-border);
+      border-radius: var(--radius-sm); padding: 10px 13px; margin-bottom: 14px;
+      align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--success);
+    }
+
+    .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .btn-secondary { background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted); font-size: 13px; font-weight: 600; padding: 8px 17px; border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; transition: all 0.14s; }
+    .btn-secondary:hover { background: var(--surface-3); color: var(--text); }
+    .btn-primary { background: var(--navy); color: #fff; border: none; border-radius: var(--radius-sm); padding: 9px 18px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 7px; }
+    .btn-primary:hover:not(:disabled) { background: var(--navy-light); box-shadow: 0 4px 12px rgba(26,58,92,0.3); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .spinner { width: 14px; height: 14px; border: 2px solid rgba(8,145,178,0.25); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.75s linear infinite; flex-shrink: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #c8d5e0; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a0b3c4; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <rect x="9" y="2" width="6" height="20" rx="2" fill="white"/>
+        <rect x="2" y="9" width="20" height="6" rx="2" fill="white"/>
+      </svg>
+    </div>
+    <div class="sidebar-brand-text">
+      <div class="sidebar-brand-name">HyperAssist</div>
+      <div class="sidebar-brand-sub">Clinical AI</div>
+    </div>
+  </div>
+
+  <button class="btn-new-chat" onclick="startNewChat()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+    New Chat
+  </button>
+
+  <div class="chat-list-label">Conversations</div>
+  <div class="chat-list" id="chatList">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="btn-upload-sidebar" onclick="openUploadModal()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      Upload Guideline PDF
+    </button>
+  </div>
+</aside>
+
+<!-- ═══ MAIN AREA ═══ -->
+<div class="main-area">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <!-- Sidebar toggle -->
+      <button class="btn-sidebar-toggle" id="sidebarToggleBtn" onclick="toggleSidebar()" title="Toggle sidebar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <span class="topbar-label">Indexed Guidelines:</span>
+      <div class="guideline-badges" id="guidelineBadges">
+        <span class="badge-guideline"><span class="badge-dot" style="background:#f59e0b;"></span>Loading…</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- App shell -->
+  <div class="app-shell" id="appShell">
+
+    <!-- Chat column -->
+    <div class="chat-col">
+      <div class="messages-area" id="messagesArea">
+        <div class="messages-inner" id="messagesInner">
+          <!-- Welcome state -->
+          <div class="welcome-state" id="welcomeState">
+            <div class="welcome-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="9" y="2" width="6" height="20" rx="2" fill="white"/>
+                <rect x="2" y="9" width="20" height="6" rx="2" fill="white"/>
+              </svg>
+            </div>
+            <div class="welcome-eyebrow">Clinical Decision Support</div>
+            <h1>Hypertension Guidelines</h1>
+            <p>Ask clinical questions to get evidence-grounded answers cited directly from indexed guidelines.</p>
+            <div class="suggestions">
+              <span class="suggestion-chip" onclick="setQuery(this)">BP threshold for pharmacological treatment?</span>
+              <span class="suggestion-chip" onclick="setQuery(this)">Which drug classes are first-line agents?</span>
+              <span class="suggestion-chip" onclick="setQuery(this)">What are target blood pressure goals?</span>
+              <span class="suggestion-chip" onclick="setQuery(this)">When is combination therapy recommended?</span>
+              <span class="suggestion-chip" onclick="setQuery(this)">USPSTF hypertension screening recommendations?</span>
+              <span class="suggestion-chip" onclick="setQuery(this)">Lifestyle modifications for hypertension?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input bar -->
+      <div class="input-bar">
+        <div class="input-inner">
+          <div class="input-card">
+            <textarea id="queryInput" rows="1"
+              placeholder="Ask about hypertension guidelines…"
+              oninput="autoResize(this)"
+              onkeydown="handleKey(event)"></textarea>
+            <button class="btn-send" id="sendBtn" onclick="submitQuery()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-hint"><kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF Panel -->
+    <div class="pdf-panel" id="pdfPanel">
+      <!-- Drag-to-resize handle on the left edge -->
+      <div class="pdf-resize-handle" id="pdfResizeHandle"></div>
+      <div class="pdf-toolbar">
+        <button class="pdf-close-btn" onclick="closePdf()">✕</button>
+        <div class="pdf-title-info">
+          <div class="pdf-file-icon">
+            <svg width="9" height="11" viewBox="0 0 24 24" fill="#dc2626">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="pdf-title-text" id="pdfDocName">Document</span>
+        </div>
+        <div class="pdf-controls">
+          <button class="btn-icon" onclick="changePage(-1)">‹</button>
+          <div class="page-wrap">
+            <input type="number" id="pageNumInput" min="1" value="1" onchange="goToPage(this.value)"/>
+            <span>/ <span id="pageCount">–</span></span>
+          </div>
+          <button class="btn-icon" onclick="changePage(1)">›</button>
+          <div class="toolbar-div"></div>
+          <button class="btn-icon" onclick="changeZoom(-0.15)">−</button>
+          <span class="zoom-lbl" id="zoomLbl">115%</span>
+          <button class="btn-icon" onclick="changeZoom(0.15)">+</button>
+        </div>
+      </div>
+      <div class="pdf-scroll" id="pdfScroll">
+        <div class="pdf-page-wrapper" id="pdfPageWrapper">
+          <canvas id="pdfCanvas"></canvas>
+          <div class="textLayer" id="pdfTextLayer"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ UPLOAD MODAL ═══ -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div>
+        <div class="modal-eyebrow">Pipeline Ingestion</div>
+        <div class="modal-title">Upload Guideline PDF</div>
+      </div>
+      <button class="btn-close-modal" id="modalCloseBtn" onclick="closeUploadModal()">✕</button>
+    </div>
+
+    <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+      <div class="dropzone-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="dropzone-text" id="dropzoneText">Drag & drop a guideline PDF, or click to browse</div>
+      <div class="dropzone-sub">WHO · NICE · ACC/AHA · ESC · USPSTF · any clinical PDF</div>
+      <input type="file" id="fileInput" accept=".pdf" style="display:none;" onchange="handleFileSelected(this.files)"/>
+    </div>
+
+    <div class="form-group">
+      <label>Guideline Title <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="docNameInput" placeholder="e.g. NICE Guideline NG136"/>
+    </div>
+    <div class="form-group">
+      <label>Issuing Organization <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="orgInput" placeholder="e.g. NICE · ACC/AHA · WHO"/>
+    </div>
+
+    <!-- Real-time progress panel -->
+    <div class="progress-panel" id="progressPanel">
+      <!-- Progress bar -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-top">
+          <span class="progress-bar-label" id="progressBarLabel">Initializing…</span>
+          <span class="progress-bar-pct" id="progressBarPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Stages -->
+      <div class="stages-list" id="stagesList">
+        <div class="stage-row" id="stg-extract">
+          <div class="stage-icon" id="stg-extract-icon">1</div>
+          <div class="stage-info">
+            <div class="stage-name" id="stg-extract-name">Extract &amp; Clean PDF</div>
+            <div class="stage-detail" id="stg-extract-detail">Waiting…</div>
+          </div>
+        </div>
+        <div class="stage-row" id="stg-sections">
+          <div class="stage-icon" id="stg-sections-icon">2</div>
+          <div class="stage-info">
+            <div class="stage-name" id="stg-sections-name">Detect Document Sections</div>
+            <div class="stage-detail" id="stg-sections-detail">Waiting…</div>
+          </div>
+        </div>
+        <div class="stage-row" id="stg-chunks">
+          <div class="stage-icon" id="stg-chunks-icon">3</div>
+          <div class="stage-info">
+            <div class="stage-name" id="stg-chunks-name">Build Text Chunks</div>
+            <div class="stage-detail" id="stg-chunks-detail">Waiting…</div>
+          </div>
+        </div>
+        <div class="stage-row" id="stg-embed">
+          <div class="stage-icon" id="stg-embed-icon">4</div>
+          <div class="stage-info">
+            <div class="stage-name" id="stg-embed-name">Generate Embeddings</div>
+            <div class="stage-detail" id="stg-embed-detail">Waiting…</div>
+          </div>
+        </div>
+        <div class="stage-row" id="stg-index">
+          <div class="stage-icon" id="stg-index-icon">5</div>
+          <div class="stage-info">
+            <div class="stage-name" id="stg-index-name">Index to Qdrant &amp; BM25</div>
+            <div class="stage-detail" id="stg-index-detail">Waiting…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rate limit warning -->
+      <div class="rate-limit-warn" id="rateLimitWarn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="rateLimitText">API rate limit reached — retrying automatically…</span>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div class="upload-success-box" id="uploadSuccessBox">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      <span id="uploadSuccessText"></span>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelBtn" onclick="closeUploadModal()">Cancel</button>
+      <button class="btn-primary" id="startUploadBtn" onclick="submitUpload()" disabled>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+        </svg>
+        Start Ingestion
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  // ════════════════════════════════
+  //  CHAT STATE & PERSISTENCE
+  // ════════════════════════════════
+  const STORAGE_KEY = "hyper_chats_v2";
+
+  // In-memory state for current session
+  let currentChatId       = null;
+  let conversationHistory = [];   // [{query, answer}, ...]
+  let messageSources      = [];   // per-message source arrays
+  let isLoading           = false;
+
+  // Load all chats from localStorage
+  function loadAllChats() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch { return {}; }
+  }
+  function saveAllChats(chats) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(chats));
+  }
+
+  // ── Initialize: load or start chat ──
+  function init() {
+    fetchGuidelines();
+    const allChats = loadAllChats();
+    const ids      = Object.keys(allChats);
+    if (ids.length > 0) {
+      // Open the most recent chat
+      const sorted = ids.sort((a,b) => (allChats[b].updatedAt||0) - (allChats[a].updatedAt||0));
+      loadChat(sorted[0]);
+    } else {
+      startNewChat();
+    }
+    renderChatList();
+  }
+
+  // ── Start a new blank chat ──
+  function startNewChat() {
+    const id = "chat-" + Date.now();
+    currentChatId       = id;
+    conversationHistory = [];
+    messageSources      = [];
+
+    // Save empty chat placeholder
+    const allChats = loadAllChats();
+    allChats[id] = { id, title: "New conversation", createdAt: Date.now(), updatedAt: Date.now(), messages: [], history: [], sources: [] };
+    saveAllChats(allChats);
+
+    // Clear UI
+    messagesInner.innerHTML = welcomeStateHTML();
+    renderChatList();
+    document.getElementById("queryInput").focus();
+  }
+
+  // ── Load an existing chat ──
+  function loadChat(id) {
+    const allChats = loadAllChats();
+    const chat     = allChats[id];
+    if (!chat) return;
+
+    currentChatId       = id;
+    conversationHistory = chat.history || [];
+    messageSources      = chat.sources || [];
+
+    // Rebuild message DOM
+    messagesInner.innerHTML = "";
+    if (!chat.messages || chat.messages.length === 0) {
+      messagesInner.innerHTML = welcomeStateHTML();
+    } else {
+      chat.messages.forEach(m => {
+        if (m.role === "user") {
+          appendUserBubble(m.text, false);
+        } else {
+          // Re-inject saved HTML directly
+          const group = document.createElement("div");
+          group.className = "message-group";
+          group.innerHTML = m.html;
+          messagesInner.appendChild(group);
+        }
+      });
+    }
+
+    renderChatList();
+    setTimeout(() => { messagesArea.scrollTop = messagesArea.scrollHeight; }, 50);
+  }
+
+  // ── Delete a chat ──
+  function deleteChat(id, ev) {
+    ev.stopPropagation();
+    const allChats = loadAllChats();
+    delete allChats[id];
+    saveAllChats(allChats);
+    if (id === currentChatId) {
+      const remaining = Object.keys(allChats);
+      if (remaining.length > 0) {
+        const sorted = remaining.sort((a,b) => (allChats[b].updatedAt||0) - (allChats[a].updatedAt||0));
+        loadChat(sorted[0]);
+      } else {
+        startNewChat();
+      }
+    }
+    renderChatList();
+  }
+
+  // ── Render sidebar chat list ──
+  function renderChatList() {
+    const chatList = document.getElementById("chatList");
+    const allChats = loadAllChats();
+    const ids      = Object.keys(allChats).sort((a,b) => (allChats[b].updatedAt||0) - (allChats[a].updatedAt||0));
+
+    if (ids.length === 0) {
+      chatList.innerHTML = `<div style="padding:12px 16px; font-size:11px; color:rgba(255,255,255,0.25); font-style:italic;">No conversations yet</div>`;
+      return;
+    }
+
+    // Group by date
+    const now   = Date.now();
+    const ONE_D = 86400000;
+    const groups = { Today: [], Yesterday: [], "This week": [], Older: [] };
+    ids.forEach(id => {
+      const age = now - (allChats[id].updatedAt || 0);
+      if      (age < ONE_D)      groups.Today.push(id);
+      else if (age < 2 * ONE_D)  groups.Yesterday.push(id);
+      else if (age < 7 * ONE_D)  groups["This week"].push(id);
+      else                        groups.Older.push(id);
+    });
+
+    let html = "";
+    for (const [label, groupIds] of Object.entries(groups)) {
+      if (groupIds.length === 0) continue;
+      html += `<div class="chat-group-label">${label}</div>`;
+      groupIds.forEach(id => {
+        const c = allChats[id];
+        const active = id === currentChatId ? "active" : "";
+        html += `
+          <div class="chat-item ${active}" onclick="loadChat('${id}')">
+            <div class="chat-item-icon">💬</div>
+            <div class="chat-item-info">
+              <div class="chat-item-title">${escHtml(c.title || "New conversation")}</div>
+              <div class="chat-item-date">${relTime(c.updatedAt)}</div>
+            </div>
+            <button class="chat-item-del" onclick="deleteChat('${id}', event)" title="Delete">✕</button>
+          </div>`;
+      });
+    }
+    chatList.innerHTML = html;
+  }
+
+  // ── Save current message to persistent chat ──
+  function persistMessage(role, textOrHtml) {
+    const allChats = loadAllChats();
+    const chat     = allChats[currentChatId];
+    if (!chat) return;
+
+    chat.messages = chat.messages || [];
+    chat.history  = conversationHistory;
+    chat.sources  = messageSources;
+    chat.updatedAt = Date.now();
+
+    if (role === "user") {
+      chat.messages.push({ role: "user", text: textOrHtml });
+      // Set title from first user message
+      if (chat.messages.filter(m => m.role === "user").length === 1) {
+        chat.title = textOrHtml.slice(0, 55) + (textOrHtml.length > 55 ? "…" : "");
+      }
+    } else {
+      chat.messages.push({ role: "assistant", html: textOrHtml });
+    }
+
+    allChats[currentChatId] = chat;
+    saveAllChats(allChats);
+    renderChatList();
+  }
+
+  // ════════════════════════════════
+  //  QUERY SUBMISSION
+  // ════════════════════════════════
+  async function submitQuery() {
+    const q = document.getElementById("queryInput").value.trim();
+    if (!q || isLoading) return;
+
+    isLoading = true;
+    document.getElementById("sendBtn").disabled = true;
+
+    // Remove welcome state if visible
+    const ws = document.getElementById("welcomeState");
+    if (ws) ws.remove();
+
+    appendUserBubble(q, true);
+    document.getElementById("queryInput").value = "";
+    document.getElementById("queryInput").style.height = "auto";
+
+    const typingId = appendTypingIndicator();
+    scrollBottom();
+
+    try {
+      const res  = await fetch("/api/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q, history: conversationHistory.slice(-6) }),
+      });
+      const data = await res.json();
+      removeEl(typingId);
+
+      if (!res.ok || data.error) { appendError(data.error || "An error occurred."); return; }
+
+      const sources = data.sources || [];
+      const msgIdx  = messageSources.length;
+      messageSources.push(sources);
+
+      const assistantHtml = buildAssistantHTML(data.answer, sources, msgIdx);
+      appendAssistantHTML(assistantHtml);
+      persistMessage("assistant", assistantHtml);
+
+      conversationHistory.push({ query: q, answer: stripMd(data.answer) });
+      persistMessage("user", q); // also save user msg (done after to get correct order below)
+
+    } catch (e) {
+      removeEl(typingId);
+      appendError("Could not reach the assistant server. Is it running?");
+    } finally {
+      isLoading = false;
+      document.getElementById("sendBtn").disabled = false;
+      scrollBottom();
+    }
+  }
+
+  // ════════════════════════════════
+  //  DOM HELPERS
+  // ════════════════════════════════
+  const messagesArea  = document.getElementById("messagesArea");
+  const messagesInner = document.getElementById("messagesInner");
+
+  function welcomeStateHTML() {
+    return `
+      <div class="welcome-state" id="welcomeState">
+        <div class="welcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="9" y="2" width="6" height="20" rx="2" fill="white"/>
+            <rect x="2" y="9" width="20" height="6" rx="2" fill="white"/>
+          </svg>
+        </div>
+        <div class="welcome-eyebrow">Clinical Decision Support</div>
+        <h1>Hypertension Guidelines</h1>
+        <p>Ask clinical questions to get evidence-grounded answers cited from indexed guidelines.</p>
+        <div class="suggestions">
+          <span class="suggestion-chip" onclick="setQuery(this)">BP threshold for pharmacological treatment?</span>
+          <span class="suggestion-chip" onclick="setQuery(this)">Which drug classes are first-line agents?</span>
+          <span class="suggestion-chip" onclick="setQuery(this)">What are target blood pressure goals?</span>
+          <span class="suggestion-chip" onclick="setQuery(this)">When is combination therapy recommended?</span>
+          <span class="suggestion-chip" onclick="setQuery(this)">USPSTF hypertension screening recommendations?</span>
+          <span class="suggestion-chip" onclick="setQuery(this)">Lifestyle modifications for hypertension?</span>
+        </div>
+      </div>`;
+  }
+
+  function appendUserBubble(text, persist) {
+    const wrap = document.createElement("div");
+    wrap.className = "message-group";
+    wrap.innerHTML = `<div class="user-bubble-wrap"><div class="user-bubble">${escHtml(text)}</div></div>`;
+    messagesInner.appendChild(wrap);
+    if (persist) persistMessage("user", text);
+  }
+
+  function appendTypingIndicator() {
+    const id  = "typing-" + Date.now();
+    const div = document.createElement("div");
+    div.id = id; div.className = "assistant-wrap";
+    div.innerHTML = `
+      <div class="assistant-avatar">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <rect x="9" y="2" width="6" height="20" rx="2" fill="white"/>
+          <rect x="2" y="9" width="20" height="6" rx="2" fill="white"/>
+        </svg>
+      </div>
+      <div class="typing-indicator">
+        <div class="typing-dots"><span></span><span></span><span></span></div>
+        <span style="font-size:12px; color:var(--text-muted);">Searching guidelines…</span>
+      </div>`;
+    messagesInner.appendChild(div);
+    return id;
+  }
+
+  function removeEl(id) { const el = document.getElementById(id); if (el) el.remove(); }
+  function appendError(msg) {
+    const div = document.createElement("div");
+    div.className = "error-msg"; div.textContent = msg;
+    messagesInner.appendChild(div);
+  }
+
+  function buildAssistantHTML(answerMd, sources, msgIdx) {
+    let html = marked.parse(answerMd || "");
+    html = html.replace(/\[(\d+)\]/g, (match, numStr) => {
+      const idx = parseInt(numStr, 10) - 1;
+      const s   = sources[idx];
+      if (!s) return match;
+      const snippet = (s.text || "").slice(0, 180).replace(/[\r\n]+/g, " ");
+      const file    = (s.pdf_file || "Guideline").replace(".pdf", "");
+      return `<span class="cit" onclick="openSource(${msgIdx},${idx})">[${numStr}]<div class="cit-pop"><div class="cit-pop-head">${escHtml(file)} · p.${s.page_start}</div><div class="cit-pop-title">${escHtml(s.section_title||"Clinical Section")}</div><div class="cit-pop-quote">"${escHtml(snippet)}…"</div><div class="cit-pop-action">Click to view &amp; highlight in PDF →</div></div></span>`;
+    });
+
+    let sourcesHtml = "";
+    if (sources.length > 0) {
+      const cards = sources.map((s, i) => {
+        const doc = (s.pdf_file || "Guideline").replace(".pdf", "");
+        return `<div class="source-card" onclick="openSource(${msgIdx},${i})"><div class="source-left"><div class="source-num">${i+1}</div><div class="source-info"><div class="source-doc">${escHtml(doc)}</div><div class="source-title">${escHtml(s.section_title || "Clinical Section")}</div></div></div><div style="display:flex;gap:4px;flex-shrink:0;"><span class="tag">pp.${s.page_start}–${s.page_end}</span></div></div>`;
+      }).join("");
+      sourcesHtml = `<div class="sources-wrap"><div class="sources-hdr"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg> Cited Evidence Sources</div><div class="sources-grid">${cards}</div></div>`;
+    }
+
+    return `
+      <div class="assistant-wrap">
+        <div class="assistant-avatar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <rect x="9" y="2" width="6" height="20" rx="2" fill="white"/>
+            <rect x="2" y="9" width="20" height="6" rx="2" fill="white"/>
+          </svg>
+        </div>
+        <div class="assistant-body">
+          <div class="answer-card">
+            <div class="answer-card-hdr">
+              <div class="answer-hdr-icon">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              </div>
+              <span class="answer-hdr-label">Verified Clinical Answer</span>
+            </div>
+            <div class="answer-card-body"><div class="answer-body">${html}</div></div>
+          </div>
+          ${sourcesHtml}
+        </div>
+      </div>`;
+  }
+
+  function appendAssistantHTML(html) {
+    const group = document.createElement("div");
+    group.className = "message-group";
+    group.innerHTML = html;
+    messagesInner.appendChild(group);
+  }
+
+  // ════════════════════════════════
+  //  PDF VIEWER
+  // ════════════════════════════════
+  let pdfDoc = null, pdfPage = 1, pdfUrl = null, pdfScale = 1.15, hlText = null;
+
+  function openSource(msgIdx, srcIdx) {
+    const sources = messageSources[msgIdx];
+    if (!sources) return;
+    const s = sources[srcIdx];
+    if (!s) return;
+    const filename = s.pdf_file || "WHO_guideline_01.pdf";
+    const page     = s.page_start || 1;
+    hlText = s.text || "";
+    document.getElementById("pdfDocName").textContent = filename;
+    document.getElementById("appShell").classList.add("pdf-open");
+    const url = `/pdf/${encodeURIComponent(filename)}`;
+    if (pdfUrl !== url) { pdfUrl = url; loadPdf(url).then(() => renderPage(page)); }
+    else renderPage(page);
+  }
+
+  function closePdf() { document.getElementById("appShell").classList.remove("pdf-open"); }
+
+  async function loadPdf(url) {
+    try {
+      pdfDoc = await pdfjsLib.getDocument(url).promise;
+      document.getElementById("pageCount").textContent = pdfDoc.numPages;
+      document.getElementById("pageNumInput").max      = pdfDoc.numPages;
+    } catch(e) { console.error("PDF load failed:", e); }
+  }
+
+  async function renderPage(num) {
+    if (!pdfDoc) return;
+    num = Math.max(1, Math.min(num, pdfDoc.numPages));
+    pdfPage = num;
+    document.getElementById("pageNumInput").value = num;
+    try {
+      const page = await pdfDoc.getPage(num);
+      const vp   = page.getViewport({ scale: pdfScale });
+      const canvas = document.getElementById("pdfCanvas");
+      const wrapper = document.getElementById("pdfPageWrapper");
+      const textLyr = document.getElementById("pdfTextLayer");
+      canvas.width  = vp.width; canvas.height = vp.height;
+      wrapper.style.width = vp.width + "px"; wrapper.style.height = vp.height + "px";
+      await page.render({ canvasContext: canvas.getContext("2d"), viewport: vp }).promise;
+      textLyr.innerHTML = ""; textLyr.style.width = vp.width + "px"; textLyr.style.height = vp.height + "px";
+      const tc = await page.getTextContent();
+      await pdfjsLib.renderTextLayer({ textContentSource: tc, container: textLyr, viewport: vp, textDivs: [] }).promise;
+      if (hlText) applyHighlight(hlText, textLyr);
+    } catch(e) { console.error("Render error:", e); }
+  }
+
+  function applyHighlight(passageText, textLyr) {
+    const norm  = passageText.replace(/[\r\n\s]+/g, " ").trim().toLowerCase();
+    if (!norm) return;
+    const words = norm.split(" ").filter(w => w.length > 3);
+    if (words.length < 2) return;
+    const ngrams = new Set();
+    for (let i = 0; i <= words.length - 3; i++) ngrams.add(words.slice(i, i+3).join(" "));
+    for (let i = 0; i < Math.min(4, words.length - 1); i++) ngrams.add(words[i] + " " + words[i+1]);
+
+    const spans = Array.from(textLyr.querySelectorAll("span"));
+    let first = null, hits = 0;
+    spans.forEach(span => {
+      const st = span.textContent.replace(/[\r\n\s]+/g, " ").trim().toLowerCase();
+      if (st.length < 4) return;
+      let matched = false;
+      for (const ng of ngrams) { if (st.includes(ng)) { matched = true; break; } }
+      if (!matched && st.length >= 8 && norm.includes(st)) matched = true;
+      if (matched) { span.classList.add("pdf-highlight"); hits++; if (!first) first = span; }
+    });
+    if (hits > spans.length * 0.25 && spans.length > 20) {
+      spans.forEach(s => s.classList.remove("pdf-highlight"));
+      first = null;
+    }
+    if (first) setTimeout(() => first.scrollIntoView({ behavior: "smooth", block: "center" }), 200);
+  }
+
+  function changePage(d) { if (pdfDoc) { const n = pdfPage + d; if (n >= 1 && n <= pdfDoc.numPages) renderPage(n); } }
+  function goToPage(v)   { const p = parseInt(v,10); if (!isNaN(p)) renderPage(p); }
+  function changeZoom(d) {
+    pdfScale = parseFloat(Math.max(0.6, Math.min(2.5, pdfScale + d)).toFixed(2));
+    document.getElementById("zoomLbl").textContent = Math.round(pdfScale*100) + "%";
+    if (pdfDoc) renderPage(pdfPage);
+  }
+
+  // ════════════════════════════════
+  //  UPLOAD MODAL + REAL-TIME PROGRESS
+  // ════════════════════════════════
+  let selectedFile = null;
+
+  const STAGE_MAP = {
+    "start":      "extract",
+    "extract":    "extract",
+    "sections":   "sections",
+    "chunks":     "chunks",
+    "embed":      "embed",
+    "rate_limit": "embed",
+    "index":      "index",
+    "done":       "index",
+    "complete":   "index",
+  };
+  const STAGE_ORDER = ["extract", "sections", "chunks", "embed", "index"];
+
+  function openUploadModal() {
+    document.getElementById("uploadModal").classList.add("active");
+    resetProgressUI();
+    document.getElementById("uploadSuccessBox").style.display = "none";
+    document.getElementById("startUploadBtn").disabled  = true;
+    document.getElementById("modalCloseBtn").disabled   = false;
+    document.getElementById("cancelBtn").disabled       = false;
+    document.getElementById("docNameInput").value       = "";
+    document.getElementById("orgInput").value           = "";
+    document.getElementById("dropzoneText").textContent = "Drag & drop a guideline PDF, or click to browse";
+    selectedFile = null;
+  }
+  function closeUploadModal() {
+    document.getElementById("uploadModal").classList.remove("active");
+  }
+
+  function resetProgressUI() {
+    document.getElementById("progressPanel").classList.remove("active");
+    document.getElementById("progressFill").style.width  = "0%";
+    document.getElementById("progressFill").classList.remove("indeterminate");
+    document.getElementById("progressBarPct").textContent   = "0%";
+    document.getElementById("progressBarLabel").textContent = "Initializing…";
+    document.getElementById("rateLimitWarn").classList.remove("visible");
+    STAGE_ORDER.forEach(key => {
+      const icon = document.getElementById(`stg-${key}-icon`);
+      const name = document.getElementById(`stg-${key}-name`);
+      const det  = document.getElementById(`stg-${key}-detail`);
+      icon.className = "stage-icon";
+      name.className = "stage-name";
+      if (det) det.textContent = "Waiting…";
+    });
+  }
+
+  function setStageStatus(stageKey, status, detail) {
+    const icon = document.getElementById(`stg-${stageKey}-icon`);
+    const name = document.getElementById(`stg-${stageKey}-name`);
+    const det  = document.getElementById(`stg-${stageKey}-detail`);
+    if (!icon) return;
+    icon.className = "stage-icon " + status;
+    name.className = "stage-name " + status;
+    if (det && detail) det.textContent = detail;
+    // Mark all preceding stages as done
+    if (status === "active" || status === "done") {
+      const idx = STAGE_ORDER.indexOf(stageKey);
+      STAGE_ORDER.slice(0, idx).forEach(k => {
+        const pi = document.getElementById(`stg-${k}-icon`);
+        const pn = document.getElementById(`stg-${k}-name`);
+        if (pi && !pi.classList.contains("done")) { pi.className = "stage-icon done"; pn.className = "stage-name done"; pi.textContent = "✓"; }
+      });
+    }
+  }
+
+  function updateProgress(event) {
+    const { stage, message, percent } = event;
+    const stageKey = STAGE_MAP[stage];
+
+    // Update bar
+    if (percent >= 0) {
+      const pct = Math.min(Math.round(percent), 100);
+      document.getElementById("progressFill").style.width = pct + "%";
+      document.getElementById("progressFill").classList.remove("indeterminate");
+      document.getElementById("progressBarPct").textContent   = pct + "%";
+      document.getElementById("progressBarLabel").textContent = message;
+    }
+
+    // Rate limit warning
+    if (stage === "rate_limit") {
+      document.getElementById("rateLimitText").textContent = message;
+      document.getElementById("rateLimitWarn").classList.add("visible");
+    } else {
+      document.getElementById("rateLimitWarn").classList.remove("visible");
+    }
+
+    // Stage icons
+    if (stageKey) {
+      if (stage === "done" || stage === "complete") {
+        // Mark all stages done
+        STAGE_ORDER.forEach(k => {
+          const pi = document.getElementById(`stg-${k}-icon`);
+          const pn = document.getElementById(`stg-${k}-name`);
+          if (pi) { pi.className = "stage-icon done"; pn.className = "stage-name done"; pi.textContent = "✓"; }
+        });
+      } else {
+        setStageStatus(stageKey, "active", message);
+      }
+    }
+  }
+
+  async function submitUpload() {
+    if (!selectedFile) return;
+
+    document.getElementById("startUploadBtn").disabled  = true;
+    document.getElementById("modalCloseBtn").disabled   = true;
+    document.getElementById("cancelBtn").disabled       = true;
+    document.getElementById("progressPanel").classList.add("active");
+    document.getElementById("progressFill").classList.add("indeterminate");
+    document.getElementById("progressBarLabel").textContent = "Uploading file…";
+
+    const form = new FormData();
+    form.append("file",          selectedFile);
+    form.append("document_name", document.getElementById("docNameInput").value.trim());
+    form.append("organization",  document.getElementById("orgInput").value.trim());
+
+    let uploadId;
+    try {
+      const res  = await fetch("/api/upload", { method: "POST", body: form });
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        showUploadError(data.error || "Upload failed");
+        return;
+      }
+      uploadId = data.upload_id;
+    } catch(e) {
+      showUploadError("Network error: " + e.message);
+      return;
+    }
+
+    // Stop indeterminate now that upload finished — real progress starts
+    document.getElementById("progressFill").classList.remove("indeterminate");
+    document.getElementById("progressFill").style.width = "2%";
+
+    // Open SSE stream
+    const evtSource = new EventSource(`/api/upload-stream/${uploadId}`);
+
+    evtSource.onmessage = (e) => {
+      try {
+        const event = JSON.parse(e.data);
+        updateProgress(event);
+
+        if (event.stage === "complete") {
+          evtSource.close();
+          showUploadSuccess(event.message, event.details);
+          fetchGuidelines();
+        } else if (event.stage === "error") {
+          evtSource.close();
+          showUploadError(event.message);
+        }
+      } catch {}
+    };
+
+    evtSource.onerror = () => {
+      evtSource.close();
+      // If the stream closes naturally after "complete", that's fine
+    };
+
+    evtSource.addEventListener("close", () => { evtSource.close(); });
+  }
+
+  function showUploadSuccess(msg, details) {
+    const txt = details ? `${msg} — ${details.total_chunks || 0} chunks indexed` : msg;
+    document.getElementById("uploadSuccessText").textContent = txt;
+    document.getElementById("uploadSuccessBox").style.display = "flex";
+    document.getElementById("modalCloseBtn").disabled = false;
+    document.getElementById("cancelBtn").disabled     = false;
+    setTimeout(closeUploadModal, 2800);
+  }
+
+  function showUploadError(msg) {
+    document.getElementById("progressBarLabel").textContent = "Error";
+    STAGE_ORDER.forEach(k => {
+      const pi = document.getElementById(`stg-${k}-icon`);
+      if (pi && pi.classList.contains("active")) { pi.className = "stage-icon error"; pi.textContent = "✕"; }
+    });
+    alert("Ingestion failed: " + msg);
+    document.getElementById("startUploadBtn").disabled  = false;
+    document.getElementById("modalCloseBtn").disabled   = false;
+    document.getElementById("cancelBtn").disabled       = false;
+  }
+
+  // Drag & drop
+  const dropzone = document.getElementById("dropzone");
+  ["dragenter","dragover"].forEach(ev => dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.add("dragover"); }));
+  ["dragleave","drop"].forEach(ev      => dropzone.addEventListener(ev, e => { e.preventDefault(); dropzone.classList.remove("dragover"); }));
+  dropzone.addEventListener("drop",    e => { if (e.dataTransfer.files.length > 0) handleFileSelected(e.dataTransfer.files); });
+
+  function handleFileSelected(files) {
+    if (!files || !files.length) return;
+    const f = files[0];
+    if (!f.name.toLowerCase().endsWith(".pdf")) { alert("Please select a PDF file."); return; }
+    selectedFile = f;
+    document.getElementById("dropzoneText").textContent = `✓  ${f.name}  (${(f.size/1024/1024).toFixed(1)} MB)`;
+    document.getElementById("startUploadBtn").disabled  = false;
+  }
+
+  // ════════════════════════════════
+  //  UTILITIES
+  // ════════════════════════════════
+  async function fetchGuidelines() {
+    try {
+      const res  = await fetch("/api/guidelines");
+      const data = await res.json();
+      const el   = document.getElementById("guidelineBadges");
+      if (data.guidelines && data.guidelines.length > 0) {
+        el.innerHTML = data.guidelines.map(g =>
+          `<span class="badge-guideline"><span class="badge-dot"></span>${g.organization||'Guideline'}</span>`
+        ).join("");
+      } else {
+        el.innerHTML = `<span class="badge-guideline"><span class="badge-dot" style="background:#f59e0b;"></span>No guidelines loaded</span>`;
+      }
+    } catch {}
+  }
+
+  function autoResize(el) { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 150) + "px"; }
+  function handleKey(e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submitQuery(); } }
+  function setQuery(el) { const qi = document.getElementById("queryInput"); qi.value = el.textContent.trim(); autoResize(qi); qi.focus(); submitQuery(); }
+  function scrollBottom() { setTimeout(() => { messagesArea.scrollTop = messagesArea.scrollHeight; }, 60); }
+  function escHtml(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+  function stripMd(md) { return md.replace(/\[(\d+)\]/g,"").replace(/[#*`_~>]/g,"").replace(/\n+/g," ").trim(); }
+  function relTime(ts) {
+    if (!ts) return "";
+    const d = Date.now() - ts;
+    if (d < 60000)    return "Just now";
+    if (d < 3600000)  return Math.floor(d/60000) + "m ago";
+    if (d < 86400000) return Math.floor(d/3600000) + "h ago";
+    return Math.floor(d/86400000) + "d ago";
+  }
+
+  // ════════════════════════════════
+  //  SIDEBAR TOGGLE
+  // ════════════════════════════════
+  function toggleSidebar() {
+    const collapsed = document.body.classList.toggle("sidebar-collapsed");
+    localStorage.setItem("sidebar_collapsed", collapsed ? "1" : "0");
+  }
+  // Restore sidebar state on load
+  if (localStorage.getItem("sidebar_collapsed") === "1") {
+    document.body.classList.add("sidebar-collapsed");
+  }
+
+  // ════════════════════════════════
+  //  PDF PANEL DRAG-TO-RESIZE
+  // ════════════════════════════════
+  (function() {
+    const handle   = document.getElementById("pdfResizeHandle");
+    const panel    = document.getElementById("pdfPanel");
+    const appShell = document.getElementById("appShell");
+    let dragging   = false;
+    let startX     = 0;
+    let startW     = 0;
+
+    handle.addEventListener("mousedown", (e) => {
+      dragging = true;
+      startX   = e.clientX;
+      startW   = panel.getBoundingClientRect().width;
+      handle.classList.add("dragging");
+      document.body.classList.add("resizing-pdf");
+      e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!dragging) return;
+      // Dragging left = increase width, dragging right = decrease
+      const delta  = startX - e.clientX;
+      const newW   = Math.min(Math.max(startW + delta, 300), window.innerWidth * 0.85);
+      // Update CSS variable so both the panel and chat margin sync
+      document.documentElement.style.setProperty("--pdf-w", newW + "px");
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (!dragging) return;
+      dragging = false;
+      handle.classList.remove("dragging");
+      document.body.classList.remove("resizing-pdf");
+      // Persist width for next session
+      const w = panel.getBoundingClientRect().width;
+      localStorage.setItem("pdf_panel_w", Math.round(w));
+      // Re-render the current PDF page at new width
+      if (pdfDoc) renderPage(pdfPage);
+    });
+
+    // Restore saved width
+    const savedW = parseInt(localStorage.getItem("pdf_panel_w"), 10);
+    if (savedW && savedW >= 300) {
+      document.documentElement.style.setProperty("--pdf-w", savedW + "px");
+    }
+  })();
+
+  // ── Boot ──
+  init();
+</script>
+</body>
+</html>

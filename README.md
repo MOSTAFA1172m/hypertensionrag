@@ -1,122 +1,243 @@
 # Hypertension Guideline RAG
 
-**AI Clinical Decision Support Hackathon Project**  
-Real-time, grounded hypertension guidance with zero hallucination.
+**AI Clinical Decision Support Hackathon Project**
+
+A retrieval-augmented generation (RAG) system for answering hypertension-related questions using evidence retrieved from established clinical guidelines. The system focuses on keeping responses grounded in the retrieved sources and providing citations for the supporting evidence.
 
 ---
 
-##  Project Overview
+## Overview
 
-A retrieval-augmented generation (RAG) system over four authoritative hypertension guidelines:
-- **WHO 2021** — Pharmacological treatment of hypertension in adults
-- **ESC 2024** — European Society of Cardiology guideline
-- **USPSTF** — Screening recommendation
-- **CDC Health E-Stats** — Adult hypertension data
+The project uses four sources covering hypertension treatment, screening, and population data:
 
-The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** and generates answers grounded in the retrieved context via **Google Gemini Flash Lite**.
+* **WHO 2021** — Pharmacological Treatment of Hypertension in Adults
+* **ESC 2024** — European Society of Cardiology Guidelines
+* **USPSTF** — Hypertension Screening Recommendation
+* **CDC Health E-Stats** — Adult Hypertension Data
 
----
+The final retrieval pipeline uses **BM25 over a deduplicated corpus of 435 chunks**. Retrieved evidence is passed to **Google Gemini Flash Lite**, which generates the final response based on the provided context.
 
-## ✨ Key Results (200-question benchmark)
-
-| Metric | Score |
-|---|---|
-| **hit@1** | 75.5% |
-| **hit@5** | 94.5% |
-| **MRR** | 0.826 |
-| **Latency** | ~2 ms/query |
-| **Faithfulness** | **5.0/5** (zero hallucination) |
-| **Correctness** | 4.84/5 |
-| **Citation validity** | 0.99 |
-
-**Deduplication** (813 → 435 chunks) was the single biggest improvement (+17.5 pts hit@1).
+The original corpus contained **813 chunks**. After preprocessing and deduplication, this was reduced to **435 unique chunks**.
 
 ---
 
-## 🛠 Tech Stack
+## Results
 
-- **Language:** Python 3.11
-- **Retrieval:** BM25 (`rank-bm25`), Qdrant vector store, Google `gemini-embedding-001` (3072-d)
-- **Generation:** `google-genai` · `gemini-flash-lite-latest` (temperature 0.1)
-- **Chunking:** `tiktoken` · 600/80 tokens
-- **UI:** Gradio (Hugging Face Spaces) + Flask
-- **Evaluation:** Custom benchmark scripts (`benchmark_200.py`) + LLM judge (temperature 0.0)
-- **Infra:** Docker + waitress, Hugging Face Space (ZeroGPU)
+The system was evaluated on a **200-question benchmark** covering retrieval, answer correctness, faithfulness, and citation quality.
+
+| Metric                |          Result |
+| --------------------- | --------------: |
+| **Hit@1**             |       **75.5%** |
+| **Hit@5**             |       **94.5%** |
+| **MRR**               |       **0.826** |
+| **Retrieval latency** | **~2 ms/query** |
+| **Faithfulness**      |     **5.0 / 5** |
+| **Correctness**       |    **4.84 / 5** |
+| **Citation validity** |        **0.99** |
+
+The largest improvement during the retrieval experiments came from deduplication. Reducing the corpus from **813 to 435 chunks improved Hit@1 by 17.5 percentage points**.
 
 ---
 
-##  1-Minute Video
+## Retrieval
+
+The final system uses **BM25** as the main retrieval method.
+
+Several retrieval configurations were tested during development, including dense and hybrid approaches. BM25 provided the best overall balance for this dataset, giving strong retrieval performance while keeping the system simple and fast.
+
+The retrieval pipeline operates on the deduplicated corpus and returns the most relevant guideline chunks for each query.
+
+---
+
+## Generation
+
+Retrieved chunks are provided to **Google Gemini Flash Lite** using a grounding-focused prompt.
+
+The generation pipeline is designed to:
+
+* Base answers on the retrieved evidence.
+* Include citations to the supporting sources.
+* Avoid adding information that is not supported by the retrieved context.
+* Refuse to provide an answer when sufficient evidence is not available.
+* Use a low temperature for more consistent responses.
+
+In the 200-question evaluation, the generated answers received a **5.0/5 faithfulness score**, with no hallucinations identified by the evaluation process.
+
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+    A[WHO / ESC / USPSTF / CDC] --> B[Document Processing]
+    B --> C[Chunking]
+    C --> D[Deduplication]
+    D --> E[435 Unique Chunks]
+    E --> F[BM25 Retrieval]
+
+    Q[User Question] --> F
+    F --> G[Retrieved Evidence]
+    G --> H[Gemini Flash Lite]
+    H --> I[Grounded Answer + Citations]
+```
+
+---
+
+## Tech Stack
+
+| Component            | Technology                                       |
+| -------------------- | ------------------------------------------------ |
+| **Language**         | Python 3.11                                      |
+| **Retrieval**        | BM25 · `rank-bm25`                               |
+| **Vector Store**     | Qdrant                                           |
+| **Embeddings**       | Google `gemini-embedding-001` (3072-d)           |
+| **Generation**       | Google Gemini Flash Lite                         |
+| **Chunking**         | `tiktoken` (600-token chunks / 80-token overlap) |
+| **UI**               | Gradio                                           |
+| **Backend**          | Flask                                            |
+| **Deployment**       | Hugging Face Spaces                              |
+| **Containerization** | Docker                                           |
+| **Server**           | Waitress                                         |
+| **Evaluation**       | Custom benchmark + LLM-based evaluation          |
+
+---
+
+## Demo
 
 ![Hypertension Guideline RAG Demo](demo_video.gif)
 
-*A 1-minute demonstration of the Hypertension Guideline RAG system.*
+*A short demonstration of the system, from submitting a question to receiving a grounded answer with supporting sources.*
+
 ---
 
-## 📸 Photo at Creative Orange Hackathon
+## Creativa Orange Hackathon
 
 ![Me at Creativa Orange Hackathon](hackathon_photo.jpg)
 
-*This project was developed as part of the Creativa Orange Hackathon, showcasing an AI-powered clinical decision-support system for hypertension guidelines. The system retrieves evidence from major medical guidelines (WHO, ESC, USPSTF, CDC) using BM25 sparse retrieval on a deduplicated corpus, and generates grounded, citation-verified answers using Google Gemini Flash Lite.*
+This project was developed as part of the **Creativa Orange Hackathon**.
 
-*Key achievements:*
-- **Faithfulness 5.0/5** – zero hallucination across 200 evaluated answers
-- **Correctness 4.84/5** – high-quality grounded responses  
-- **hit@5 94.5%** retrieval accuracy on deduplicated corpus
-- **~2 ms/query** latency for real-time clinical assistance
+The goal was to build a practical RAG-based system that could make information from hypertension guidelines easier to access while keeping the generated answers tied to the underlying sources.
 
-*Technical highlights:*
-- Deduplication (813→435 chunks) was the single biggest improvement (+17.5 pts hit@1)
-- BM25 over dense/hybrid/reranker variants – best performance at minimal cost
-- Grounding-first generation: refuses on missing evidence, never fabricates
-- Deployed live on Hugging Face Spaces (Gradio + ZeroGPU)
+### Highlights
 
-*Value proposition:* Clinicians get instant, evidence-backed hypertension guidance at point-of-care, with verifiable sources and zero hallucination – addressing the critical need for trustworthy AI in clinical decision support.
+* 200-question evaluation benchmark
+* **94.5% Hit@5**
+* **75.5% Hit@1**
+* **5.0/5 faithfulness**
+* **4.84/5 correctness**
+* **0.99 citation validity**
+* **~2 ms/query retrieval latency**
+* **813 → 435 chunks** after deduplication
+* **+17.5 percentage points in Hit@1** from deduplication
+* Live deployment using Gradio and Hugging Face Spaces
+
+---
+
+## Team
+
+This project was built as a team for the **Creativa Orange Hackathon**.
+
+A big thank you to everyone who contributed their time, ideas, and effort:
+
+* **Yakoot Shaker**
+* **Yasser Eldaly**
+* **Youssef Gomaa**
+* **Mostafa Hazem**
+
+I really appreciate the work and collaboration that everyone put into making this project happen.
 
 ---
 
 ## Quick Start
 
+### 1. Install dependencies
+
 ```bash
-# 1. Install dependencies
 pip install -r requirements.txt
+```
 
-# 2. Set your Gemini API key
+### 2. Set your Gemini API key
+
+**Windows PowerShell:**
+
+```powershell
+$env:GEMINI_API_KEY="your_key_here"
+```
+
+**Windows CMD:**
+
+```cmd
 set GEMINI_API_KEY=your_key_here
+```
 
-# 3. Run the Gradio app
+**Linux / macOS:**
+
+```bash
+export GEMINI_API_KEY="your_key_here"
+```
+
+### 3. Run the application
+
+```bash
 python gradio_app.py
+```
 
-# 4. Open http://localhost:7860
+The Gradio interface will be available at:
+
+```text
+http://localhost:7860
 ```
 
 ---
 
 ## Repository Structure
 
-```
+```text
 .
 ├── Dockerfile
-├── README.md          # This file
-├── app.py             # Entry point
-├── gradio_app.py      # Live Space UI
+├── README.md
+├── app.py
+├── gradio_app.py
 ├── requirements.txt
+│
 ├── data/
-│   └── processed/     # Validated chunks + dedup artifacts
+│   └── processed/
+│       └── # Validated chunks and deduplication artifacts
+│
 ├── evaluation/
 │   ├── EXPERIMENTS.md
 │   ├── EVALUATION_REPORT.pdf
 │   ├── generation_results.json
 │   └── retrieval_200_dedup_results.json
-├── src/
-│   └── rag/           # Core RAG pipeline
-│       ├── bm25_retriever.py
-│       ├── rag_pipeline.py
-│       └── ...
-└── ...
+│
+└── src/
+    └── rag/
+        ├── bm25_retriever.py
+        ├── rag_pipeline.py
+        └── ...
 ```
+
+---
+
+## Evaluation
+
+Detailed evaluation results and experiments are available in the `evaluation/` directory:
+
+* `EXPERIMENTS.md` — retrieval experiments and comparisons
+* `EVALUATION_REPORT.pdf` — complete evaluation report
+* `retrieval_200_dedup_results.json` — retrieval benchmark results
+* `generation_results.json` — generation evaluation results
+
+---
+
+## Medical Disclaimer
+
+This project is a **hackathon and research prototype** and is not intended to replace professional medical judgment or serve as a medical device.
+
+The system is designed to demonstrate grounded retrieval and generation over hypertension guidelines. Clinical decisions should be based on the original guidelines, patient-specific information, and the judgment of qualified healthcare professionals.
 
 ---
 
 ## License
 
-MIT License — free for research and non-commercial use.
+MIT License.

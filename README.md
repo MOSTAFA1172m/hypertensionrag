@@ -49,7 +49,6 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 
 <video width="400" controls>
   <source src="demo_video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 ---

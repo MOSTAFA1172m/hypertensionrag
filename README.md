@@ -5,7 +5,7 @@ Real-time, grounded hypertension guidance with zero hallucination.
 
 ---
 
-## 📖 Project Overview
+##  Project Overview
 
 A retrieval-augmented generation (RAG) system over four authoritative hypertension guidelines:
 - **WHO 2021** — Pharmacological treatment of hypertension in adults
@@ -45,7 +45,7 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 
 ---
 
-## ▶️ 1-Minute Video
+##  1-Minute Video
 
 <video width="400" controls>
   <source src="demo_video.mp4" type="video/mp4">
@@ -76,7 +76,7 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # 1. Install dependencies
@@ -93,7 +93,7 @@ python gradio_app.py
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 .
@@ -119,6 +119,6 @@ python gradio_app.py
 
 ---
 
-## 📜 License
+## License
 
 MIT License — free for research and non-commercial use.

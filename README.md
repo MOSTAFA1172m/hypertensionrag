@@ -47,10 +47,9 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 
 ##  1-Minute Video
 
-<video width="400" controls>
-  <source src="demo_video.mp4" type="video/mp4">
-</video>
+![Hypertension Guideline RAG Demo](demo_video.gif)
 
+*A 1-minute demonstration of the Hypertension Guideline RAG system.*
 ---
 
 ## 📸 Photo at Creative Orange Hackathon

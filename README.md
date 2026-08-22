@@ -67,7 +67,7 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 pip install -r requirements.txt
 
 # 2. Set your Gemini API key
-set GEMINI_API_KEY=AQ.Ab8RN6Jp-s9sRWQqo_pihCysWJ5VErC89WGI345s1jS8H59T9g
+set GEMINI_API_KEY=your_key_here
 
 # 3. Run the Gradio app
 python gradio_app.py

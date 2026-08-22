@@ -48,17 +48,15 @@ The system retrieves evidence using **BM25 on a deduplicated 435-chunk corpus** 
 ## ▶️ 1-Minute Video
 
 <video width="400" controls>
-  <source src="YOUR_VIDEO_PATH_HERE.mp4" type="video/mp4">
+  <source src="demo_video.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-*[Replace `YOUR_VIDEO_PATH_HERE.mp4` with the path to your 1-minute demo video]*
 
 ---
 
 ## 📸 Photo at Creative Orange Hackathon
 
-![Me at Creative Orange Hackathon](YOUR_PHOTO_PATH_HERE.jpg)
-*[Replace `YOUR_PHOTO_PATH_HERE.jpg` with the path to your hackathon photo]*
+![Me at Creative Orange Hackathon](hackathon_photo.jpg)
 
 ---
 

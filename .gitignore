@@ -1,0 +1,17 @@
+# Ignore environment files and secrets
+.env
+myenv/
+
+# Ignore OS generated files
+*.pyc
+__pycache__/
+.DS_Store
+
+# Ignore Docker artifacts
+.dockerignore
+
+# Ignore Hugging Face token (if any)
+.hf-token
+
+# Ignore large data files that should be LFS
+data/raw/

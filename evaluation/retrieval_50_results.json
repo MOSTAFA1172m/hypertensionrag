@@ -1,0 +1,875 @@
+{
+  "benchmark_timestamp": "2026-08-19 15:58:18",
+  "test_set": "evaluation/test_set_50.json",
+  "test_set_size": 50,
+  "results": {
+    "Sparse (BM25Okapi)": {
+      "mode": "Sparse (BM25Okapi)",
+      "metrics": {
+        "avg_latency_ms": 22.02,
+        "mrr": 0.85,
+        "hit_rate@1": 0.78,
+        "precision@1": 0.78,
+        "recall@1": 0.77,
+        "hit_rate@3": 0.96,
+        "precision@3": 0.5,
+        "recall@3": 0.96,
+        "hit_rate@5": 0.96,
+        "precision@5": 0.344,
+        "recall@5": 0.96
+      },
+      "per_query": [
+        {
+          "query_id": "Q01",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "who_001_section_001_c001",
+            "who_001_section_002_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q02",
+          "top_retrieved": [
+            "doc_2024-esc-hypertension_sec_044_c002",
+            "doc_2024-esc-hypertension_sec_043_c002",
+            "who_001_section_001_c001"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q03",
+          "top_retrieved": [
+            "who_001_section_001_c001",
+            "who_001_section_007_c005",
+            "who_001_section_011_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q04",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_016_c003",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_015_c003"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q05",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "who_001_section_002_c001",
+            "who_001_section_001_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q06",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "who_001_section_001_c001",
+            "who_001_section_002_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q07",
+          "top_retrieved": [
+            "who_001_section_002_c001",
+            "who_001_section_007_c002",
+            "doc_2024-esc-hypertension_sec_178_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q08",
+          "top_retrieved": [
+            "who_001_section_002_c003",
+            "who_001_section_002_c004",
+            "who_001_section_002_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.6,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q09",
+          "top_retrieved": [
+            "who_001_section_002_c002",
+            "who_001_section_002_c003",
+            "who_001_section_011_c006"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q10",
+          "top_retrieved": [
+            "who_001_section_002_c004",
+            "who_001_section_002_c003",
+            "who_001_section_001_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.6,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q11",
+          "top_retrieved": [
+            "who_001_section_002_c003",
+            "who_001_section_002_c004",
+            "who_001_section_009_c003"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q12",
+          "top_retrieved": [
+            "who_001_section_002_c004",
+            "who_001_section_002_c001",
+            "who_001_section_002_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.8,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q13",
+          "top_retrieved": [
+            "who_001_section_003_c001",
+            "who_001_section_001_c002",
+            "doc_2024-esc-hypertension_sec_073_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q14",
+          "top_retrieved": [
+            "who_001_section_003_c001",
+            "doc_2024-esc-hypertension_sec_071_c005",
+            "doc_2024-esc-hypertension_sec_004_c016"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q15",
+          "top_retrieved": [
+            "who_001_section_008_c001",
+            "who_001_section_003_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_010_c001"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q16",
+          "top_retrieved": [
+            "who_001_section_013_c001",
+            "who_001_section_012_c001",
+            "who_001_section_003_c001"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q17",
+          "top_retrieved": [
+            "who_001_section_004_c002",
+            "who_001_section_004_c001",
+            "who_001_section_005_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.6,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q18",
+          "top_retrieved": [
+            "who_001_section_004_c002",
+            "who_001_section_004_c001",
+            "who_001_section_001_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q19",
+          "top_retrieved": [
+            "who_001_section_004_c002",
+            "who_001_section_006_c001",
+            "who_001_section_005_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q20",
+          "top_retrieved": [
+            "who_001_section_004_c002",
+            "who_001_section_004_c001",
+            "who_001_section_013_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q21",
+          "top_retrieved": [
+            "doc_2024-esc-hypertension_sec_050_c001",
+            "doc_2024-esc-hypertension_sec_051_c001",
+            "doc_2024-esc-hypertension_sec_052_c001"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 0,
+          "p@3": 0.0,
+          "recall@3": 0.0,
+          "hit@5": 0,
+          "p@5": 0.0,
+          "recall@5": 0.0
+        },
+        {
+          "query_id": "Q22",
+          "top_retrieved": [
+            "who_001_section_005_c001",
+            "who_001_section_001_c002",
+            "who_001_section_004_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q23",
+          "top_retrieved": [
+            "who_001_section_005_c001",
+            "doc_2024-esc-hypertension_sec_178_c007",
+            "who_001_section_006_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q24",
+          "top_retrieved": [
+            "who_001_section_005_c001",
+            "doc_2024-esc-hypertension_sec_029_c001",
+            "doc_2024-esc-hypertension_sec_026_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q25",
+          "top_retrieved": [
+            "who_001_section_006_c002",
+            "who_001_section_006_c001",
+            "doc_2024-esc-hypertension_sec_074_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q26",
+          "top_retrieved": [
+            "who_001_section_006_c002",
+            "who_001_section_011_c001",
+            "who_001_section_013_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q27",
+          "top_retrieved": [
+            "who_001_section_006_c002",
+            "who_001_section_011_c005",
+            "doc_2024-esc-hypertension_sec_004_c015"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q28",
+          "top_retrieved": [
+            "who_001_section_006_c002",
+            "who_001_section_008_c001",
+            "who_001_section_007_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q29",
+          "top_retrieved": [
+            "who_001_section_006_c003",
+            "who_001_section_006_c002",
+            "doc_2024-esc-hypertension_sec_181_c150"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q30",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "who_001_section_006_c003",
+            "doc_2024-esc-hypertension_sec_128_c002"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q31",
+          "top_retrieved": [
+            "who_001_section_001_c002",
+            "who_001_section_012_c001",
+            "who_001_section_007_c002"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q32",
+          "top_retrieved": [
+            "who_001_section_007_c002",
+            "who_001_section_007_c003",
+            "who_001_section_007_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.8,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q33",
+          "top_retrieved": [
+            "who_001_section_007_c002",
+            "doc_2024-esc-hypertension_sec_178_c006",
+            "who_001_section_007_c003"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.6,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q34",
+          "top_retrieved": [
+            "who_001_section_007_c003",
+            "who_001_section_007_c005",
+            "who_001_section_007_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.8,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q35",
+          "top_retrieved": [
+            "who_001_section_007_c004",
+            "who_001_section_007_c005",
+            "who_001_section_007_c003"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 1.0,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.8,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q36",
+          "top_retrieved": [
+            "who_001_section_008_c001",
+            "doc_2024-esc-hypertension_sec_004_c012",
+            "doc_2024-esc-hypertension_sec_178_c007"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q37",
+          "top_retrieved": [
+            "doc_hypertension-screening-adults-final-rec-statement_sec_010_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_008_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_009_c001"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 0,
+          "p@3": 0.0,
+          "recall@3": 0.0,
+          "hit@5": 0,
+          "p@5": 0.0,
+          "recall@5": 0.0
+        },
+        {
+          "query_id": "Q38",
+          "top_retrieved": [
+            "who_001_section_008_c001",
+            "doc_2024-esc-hypertension_sec_071_c005",
+            "doc_2024-esc-hypertension_sec_120_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q39",
+          "top_retrieved": [
+            "who_001_section_008_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_010_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_008_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q40",
+          "top_retrieved": [
+            "who_001_section_013_c001",
+            "who_001_section_012_c001",
+            "who_001_section_009_c003"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q41",
+          "top_retrieved": [
+            "doc_2024-esc-hypertension_sec_106_c002",
+            "doc_2024-esc-hypertension_sec_108_c001",
+            "who_001_section_009_c002"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q42",
+          "top_retrieved": [
+            "who_001_section_005_c001",
+            "who_001_section_006_c001",
+            "who_001_section_009_c002"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q43",
+          "top_retrieved": [
+            "who_001_section_010_c001",
+            "who_001_section_010_c003",
+            "who_001_section_001_c002"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.6,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q44",
+          "top_retrieved": [
+            "who_001_section_010_c001",
+            "who_001_section_010_c003",
+            "doc_2024-esc-hypertension_sec_004_c008"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q45",
+          "top_retrieved": [
+            "who_001_section_010_c001",
+            "doc_2024-esc-hypertension_sec_181_c079",
+            "doc_2024-esc-hypertension_sec_181_c017"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q46",
+          "top_retrieved": [
+            "who_001_section_011_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_010_c001",
+            "doc_hypertension-screening-adults-final-rec-statement_sec_008_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q47",
+          "top_retrieved": [
+            "doc_2024-esc-hypertension_sec_004_c015",
+            "who_001_section_011_c003",
+            "who_001_section_011_c002"
+          ],
+          "hit@1": 0,
+          "p@1": 0.0,
+          "recall@1": 0.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q48",
+          "top_retrieved": [
+            "who_001_section_011_c004",
+            "doc_2024-esc-hypertension_sec_178_c007",
+            "doc_2024-esc-hypertension_sec_099_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.3333,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.2,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q49",
+          "top_retrieved": [
+            "who_001_section_011_c005",
+            "who_001_section_011_c004",
+            "doc_2024-esc-hypertension_sec_101_c001"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 1.0,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        },
+        {
+          "query_id": "Q50",
+          "top_retrieved": [
+            "who_001_section_013_c001",
+            "who_001_section_013_c002",
+            "doc_2024-esc-hypertension_sec_001_c014"
+          ],
+          "hit@1": 1,
+          "p@1": 1.0,
+          "recall@1": 0.5,
+          "hit@3": 1,
+          "p@3": 0.6667,
+          "recall@3": 1.0,
+          "hit@5": 1,
+          "p@5": 0.4,
+          "recall@5": 1.0
+        }
+      ]
+    }
+  }
+}

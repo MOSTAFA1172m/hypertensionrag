@@ -1,0 +1,32 @@
+{
+  "bm25": {
+    "metrics": {
+      "avg_latency_ms": 2.42,
+      "mrr": 0.8263,
+      "hit_rate@1": 0.755,
+      "precision@1": 0.755,
+      "recall@1": 0.755,
+      "hit_rate@3": 0.89,
+      "precision@3": 0.4183,
+      "recall@3": 0.8875,
+      "hit_rate@5": 0.945,
+      "precision@5": 0.29,
+      "recall@5": 0.94
+    }
+  },
+  "bm25+medcpt": {
+    "metrics": {
+      "avg_latency_ms": 5624.81,
+      "mrr": 0.8045,
+      "hit_rate@1": 0.705,
+      "precision@1": 0.705,
+      "recall@1": 0.7,
+      "hit_rate@3": 0.9,
+      "precision@3": 0.41,
+      "recall@3": 0.8975,
+      "hit_rate@5": 0.94,
+      "precision@5": 0.293,
+      "recall@5": 0.9375
+    }
+  }
+}

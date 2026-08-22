@@ -1,0 +1,62 @@
+{
+  "bm25": {
+    "metrics": {
+      "avg_latency_ms": 1.63,
+      "mrr": 0.8263,
+      "hit_rate@1": 0.755,
+      "precision@1": 0.755,
+      "recall@1": 0.755,
+      "hit_rate@3": 0.89,
+      "precision@3": 0.4183,
+      "recall@3": 0.8875,
+      "hit_rate@5": 0.945,
+      "precision@5": 0.29,
+      "recall@5": 0.94
+    }
+  },
+  "medcpt_dense": {
+    "metrics": {
+      "avg_latency_ms": 96.68,
+      "mrr": 0.505,
+      "hit_rate@1": 0.385,
+      "precision@1": 0.385,
+      "recall@1": 0.385,
+      "hit_rate@3": 0.605,
+      "precision@3": 0.2867,
+      "recall@3": 0.605,
+      "hit_rate@5": 0.7,
+      "precision@5": 0.226,
+      "recall@5": 0.6975
+    }
+  },
+  "hybrid_rrf_medcpt": {
+    "metrics": {
+      "avg_latency_ms": 106.95,
+      "mrr": 0.7273,
+      "hit_rate@1": 0.61,
+      "precision@1": 0.61,
+      "recall@1": 0.61,
+      "hit_rate@3": 0.83,
+      "precision@3": 0.3767,
+      "recall@3": 0.8275,
+      "hit_rate@5": 0.905,
+      "precision@5": 0.283,
+      "recall@5": 0.9025
+    }
+  },
+  "hybrid_rrf_medcpt_ce": {
+    "metrics": {
+      "avg_latency_ms": 5929.24,
+      "mrr": 0.8043,
+      "hit_rate@1": 0.7,
+      "precision@1": 0.7,
+      "recall@1": 0.695,
+      "hit_rate@3": 0.905,
+      "precision@3": 0.4067,
+      "recall@3": 0.9025,
+      "hit_rate@5": 0.955,
+      "precision@5": 0.302,
+      "recall@5": 0.955
+    }
+  }
+}

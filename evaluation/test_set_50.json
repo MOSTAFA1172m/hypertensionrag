@@ -1,0 +1,502 @@
+[
+  {
+    "query_id": "Q01",
+    "query": "What are the main objectives of the 2021 WHO hypertension guideline?",
+    "answer": "**Recommendation:** The guideline's objectives are to: provide a blood pressure threshold for initiating treatment; determine if laboratory tests or cardiovascular risk assessment are required before initiation; determine which pharmacological agents to use; decide between monotherapy, dual therapy, or single-pill combinations; provide targets for blood pressure control; provide follow-up intervals; and determine how nonphysician health care workers can participate in hypertension management.\n\n**Excerpt:** \"The objectives of the hypertension guideline are to: provide a blood pressure threshold for the initiation of treatment for hypertension; determine if laboratory tests or cardiovascular risk assessment are required prior to initiation of treatment for hypertension; determine the pharmacological agents with which to initiate treatment; determine the need to initiate treatment with monotherapy, dual therapy, or single-pill combinations; provide targets for blood pressure control in hypertension; provide intervals for follow up for patients with hypertension; and determine how nonphysician health care workers can participate in the management of hypertension.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 14]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c002"],
+    "expected_pages": [14],
+    "topic": "Guideline Objectives",
+    "clinical_intent": "Verify enumeration of the guideline's stated objectives."
+  },
+  {
+    "query_id": "Q02",
+    "query": "How many people worldwide have high blood pressure and what proportion has it under control?",
+    "answer": "**Recommendation:** An estimated 1.4 billion people worldwide have high blood pressure, but only 14% have it under control.\n\n**Excerpt:** \"An estimated 1.4 billion people worldwide have high blood pressure, but just 14% have it under control (2).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 13]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c001"],
+    "expected_pages": [13],
+    "topic": "Global Burden of Hypertension",
+    "clinical_intent": "Verify global prevalence and control rate statistics."
+  },
+  {
+    "query_id": "Q03",
+    "query": "Which classes of antihypertensive drugs are identified as essential by the WHO Essential Medicines List?",
+    "answer": "**Recommendation:** The WHO Essential Medicines List identifies four classes as essential: angiotensin-converting enzyme inhibitors (ACEi), calcium channel blockers (CCB), angiotensin receptor blockers (ARB), and thiazide diuretics. Since June 2019, it also includes single-pill combination medications for hypertension.\n\n**Excerpt:** \"The WHO Essential Medicines List (EML) identifies all classes of antihypertensive drugs – angiotensin-converting enzyme inhibitors (ACEi), calcium channel blockers (CCB), angiotensin receptor blockers (ARB) and thiazide diuretics – as essential. In June 2019, the EML included single-pill combination medications for hypertension.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 13]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c001"],
+    "expected_pages": [13],
+    "topic": "Essential Medicines List",
+    "clinical_intent": "Verify the four essential antihypertensive drug classes and single-pill combinations on the EML."
+  },
+  {
+    "query_id": "Q04",
+    "query": "Does this WHO guideline address measurement of blood pressure or diagnosis of hypertension?",
+    "answer": "**Recommendation:** No. The guideline does not address measurement of blood pressure or diagnosis of hypertension. It addresses pharmacotherapy in individuals with a confirmed diagnosis of hypertension.\n\n**Excerpt:** \"The guideline does not address measurement of blood pressure or diagnosis of hypertension. It addresses pharmacotherapy in individuals with a 'confirmed' diagnosis of hypertension, such as hypertension diagnosed when blood pressure is found to be elevated on two different days.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 14]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c002"],
+    "expected_pages": [14],
+    "topic": "Guideline Scope",
+    "clinical_intent": "Verify what the guideline explicitly does NOT cover."
+  },
+  {
+    "query_id": "Q05",
+    "query": "What nonpharmacological approaches to treatment or prevention of hypertension does the guideline list?",
+    "answer": "**Recommendation:** Nonpharmacological approaches include reducing salt intake (to less than 5g daily), eating more fruit and vegetables, being physically active on a regular basis, avoiding tobacco, reducing alcohol consumption, limiting foods high in saturated fats, and eliminating/reducing trans fats in the diet.\n\n**Excerpt:** \"- reducing salt intake (to less than 5g daily) - eating more fruit and vegetables - being physically active on a regular basis - avoiding use of tobacco - reducing alcohol consumption - limiting the intake of foods high in saturated fats - eliminating/reducing trans fats in diet (2).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 14]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c002"],
+    "expected_pages": [14],
+    "topic": "Lifestyle Interventions",
+    "clinical_intent": "Verify the listed nonpharmacological interventions."
+  },
+  {
+    "query_id": "Q06",
+    "query": "Who is the target audience of the 2021 WHO hypertension guideline?",
+    "answer": "**Recommendation:** The primary audience is clinicians/health care providers at all levels of health care. The secondary audience includes national NCD/CVD programme managers, health care academics, policy-makers setting practice recommendations, students, and hypertension medicine manufacturers.\n\n**Excerpt:** \"Primary audience Clinicians/health care providers at all levels of health care. Secondary audience National NCD/CVD programme managers, health care academics, policy-makers setting practice recommendations, students, and hypertension medicine manufacturers.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 1, Page 14]",
+    "expected_section_id": "section_001",
+    "expected_chunk_ids": ["who_001_section_001_c002"],
+    "expected_pages": [14],
+    "topic": "Target Audience",
+    "clinical_intent": "Verify primary and secondary target audiences."
+  },
+  {
+    "query_id": "Q07",
+    "query": "What three groups were established by WHO to develop the hypertension guideline?",
+    "answer": "**Recommendation:** WHO established three groups: (1) an internal WHO Steering Group to coordinate development; (2) a Guideline Development Group (GDG) of clinicians, researchers, and policy-makers to review evidence and develop recommendations; and (3) an External Review Group (ERG) of technical experts and ministries of health to provide peer review.\n\n**Excerpt:** \"1. An internal WHO Steering Group to coordinate the guideline development process. 2. A Guideline Development Group (GDG), composed of hypertension (HTN) physicians, nephrologists, cardiologists, pharmacists, nurses, researchers, academics, policy-makers and representatives of patient groups, to review the evidence and develop recommendations. 3. An External Review Group (ERG), composed of technical experts, representatives of HTN patient groups and ministries of health from low-resource countries, to provide peer review of the guideline and ensure recommendations are aligned with current global needs.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.1, Page 15]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c001"],
+    "expected_pages": [15],
+    "topic": "Guideline Development Groups",
+    "clinical_intent": "Verify the three groups involved in guideline development."
+  },
+  {
+    "query_id": "Q08",
+    "query": "What approach did the GDG use to rate the certainty of evidence and develop recommendations?",
+    "answer": "**Recommendation:** The GDG used the GRADE (Grading of Recommendations Assessment, Development and Evaluation) approach to rate certainty of evidence and develop the recommendations.\n\n**Excerpt:** \"The GDG rated the certainty of evidence and developed the recommendations using the GRADE (Grading of Recommendations Assessment, Development and Evaluation) approach (4).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.5, Page 16]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c003"],
+    "expected_pages": [16],
+    "topic": "Evidence Methodology",
+    "clinical_intent": "Verify GRADE methodology was used."
+  },
+  {
+    "query_id": "Q09",
+    "query": "How many systematic reviews and primary studies were included in the guideline evidence base?",
+    "answer": "**Recommendation:** A total of 159 systematic reviews and 17 additional primary studies were included.\n\n**Excerpt:** \"A total of 159 systematic reviews and 17 additional primary studies were included.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.4, Page 16]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c002"],
+    "expected_pages": [16],
+    "topic": "Evidence Base Size",
+    "clinical_intent": "Verify the number of included systematic reviews and primary studies."
+  },
+  {
+    "query_id": "Q10",
+    "query": "What are the two categories of strength of recommendations used in this guideline?",
+    "answer": "**Recommendation:** The strength of recommendations is graded into two categories: a strong recommendation and a weak or conditional recommendation.\n\n**Excerpt:** \"A strong recommendation is one for which the GDG was confident that the desirable effects of adhering to the recommendation outweigh the undesirable effects. A weak or conditional recommendation is one for which the GDG concluded that the desirable effects of adhering to the recommendation probably outweigh the undesirable effects, but was not confident about these trade-offs.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.5, Page 17]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c004"],
+    "expected_pages": [17],
+    "topic": "Strength of Recommendations",
+    "clinical_intent": "Verify the two strength categories (strong vs weak/conditional)."
+  },
+  {
+    "query_id": "Q11",
+    "query": "What are the four levels of certainty of evidence in the GRADE approach?",
+    "answer": "**Recommendation:** According to the GRADE approach, the certainty of the evidence can be high, moderate, low, or very low.\n\n**Excerpt:** \"According to the GRADE approach, the certainty of the evidence can be high, moderate, low, or very low.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.5, Page 16]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c003"],
+    "expected_pages": [16],
+    "topic": "Certainty of Evidence",
+    "clinical_intent": "Verify the four GRADE certainty levels."
+  },
+  {
+    "query_id": "Q12",
+    "query": "How did the GDG reach consensus on the recommendations?",
+    "answer": "**Recommendation:** The GDG met virtually for four sessions in February 2021. Although a simple majority vote was planned, full consensus was reached on all recommendations.\n\n**Excerpt:** \"The GDG met virtually for four sessions in February 2021... While the plan was to use a simple majority vote, full consensus was reached on all recommendations.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 2.6, Page 17]",
+    "expected_section_id": "section_002",
+    "expected_chunk_ids": ["who_001_section_002_c004"],
+    "expected_pages": [17],
+    "topic": "Consensus Process",
+    "clinical_intent": "Verify the consensus process used by the GDG."
+  },
+  {
+    "query_id": "Q13",
+    "query": "At what blood pressure threshold should pharmacological treatment be initiated in the general adult population?",
+    "answer": "**Recommendation:** WHO recommends initiation of pharmacological antihypertensive treatment for individuals with a confirmed diagnosis of hypertension and systolic blood pressure of ≥140 mmHg or diastolic blood pressure of ≥90 mmHg. This is a strong recommendation with moderate- to high-certainty evidence.\n\n**Excerpt:** \"WHO recommends initiation of pharmacological antihypertensive treatment of individuals with a confirmed diagnosis of hypertension and systolic blood pressure of ≥140 mmHg or diastolic blood pressure of ≥90 mmHg. Strong recommendation, moderate- to high-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.1, Page 19]",
+    "expected_section_id": "section_003",
+    "expected_chunk_ids": ["who_001_section_003_c001"],
+    "expected_pages": [19],
+    "topic": "BP Initiation Threshold",
+    "clinical_intent": "Verify the general-population treatment threshold of >=140/90 mmHg."
+  },
+  {
+    "query_id": "Q14",
+    "query": "Should adults with existing cardiovascular disease and systolic blood pressure of 130-139 mmHg receive pharmacological treatment?",
+    "answer": "**Recommendation:** Yes. WHO recommends pharmacological antihypertensive treatment of individuals with existing cardiovascular disease and systolic blood pressure of 130–139 mmHg. This is a strong recommendation with moderate- to high-certainty evidence.\n\n**Excerpt:** \"WHO recommends pharmacological antihypertensive treatment of individuals with existing cardiovascular disease and systolic blood pressure of 130–139 mmHg. Strong recommendation, moderate- to high-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.1, Page 19]",
+    "expected_section_id": "section_003",
+    "expected_chunk_ids": ["who_001_section_003_c001"],
+    "expected_pages": [19],
+    "topic": "BP Threshold CVD",
+    "clinical_intent": "Verify treatment is recommended in CVD patients with SBP 130-139."
+  },
+  {
+    "query_id": "Q15",
+    "query": "What does WHO suggest for patients without cardiovascular disease but with high cardiovascular risk, diabetes mellitus, or chronic kidney disease and systolic blood pressure of 130-139 mmHg?",
+    "answer": "**Recommendation:** WHO suggests pharmacological antihypertensive treatment for these individuals (SBP 130–139 mmHg without CVD but with high CVD risk, diabetes mellitus, or chronic kidney disease). This is a conditional recommendation with moderate- to high-certainty evidence.\n\n**Excerpt:** \"WHO suggests pharmacological antihypertensive treatment of individuals without cardiovascular disease but with high cardiovascular risk, diabetes mellitus, or chronic kidney disease, and systolic blood pressure of 130–139 mmHg. Conditional recommendation, moderate- to high-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.1, Page 19]",
+    "expected_section_id": "section_003",
+    "expected_chunk_ids": ["who_001_section_003_c001"],
+    "expected_pages": [19],
+    "topic": "BP Threshold High Risk",
+    "clinical_intent": "Verify conditional recommendation for high-risk groups at SBP 130-139."
+  },
+  {
+    "query_id": "Q16",
+    "query": "How soon after diagnosis should pharmacological treatment be initiated, and when should it start without delay?",
+    "answer": "**Recommendation:** Initiation of pharmacological hypertension treatment should start no later than four weeks following diagnosis. If blood pressure is high (e.g., systolic ≥160 mmHg or diastolic ≥100 mmHg) or there is accompanying evidence of end organ damage, treatment should be started without delay.\n\n**Excerpt:** \"Initiation of pharmacological hypertension (HTN) treatment should start no later than four weeks following diagnosis of HTN. If blood pressure level is high (e.g. systolic ≥160 mmHg or diastolic ≥100 mmHg) or there is accompanying evidence of end organ damage, initiation of treatment should be started without delay.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.1, Page 19]",
+    "expected_section_id": "section_003",
+    "expected_chunk_ids": ["who_001_section_003_c001"],
+    "expected_pages": [19],
+    "topic": "Treatment Timing",
+    "clinical_intent": "Verify 4-week initiation window and immediate-start criteria."
+  },
+  {
+    "query_id": "Q17",
+    "query": "What does WHO suggest regarding laboratory testing before starting pharmacological therapy for hypertension?",
+    "answer": "**Recommendation:** When starting pharmacological therapy, WHO suggests obtaining tests to screen for comorbidities and secondary hypertension, but only when testing does not delay or impede starting treatment. This is a conditional recommendation with low-certainty evidence.\n\n**Excerpt:** \"When starting pharmacological therapy for hypertension, WHO suggests obtaining tests to screen for comorbidities and secondary hypertension, but only when testing does not delay or impede starting treatment. Conditional recommendation, low-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.2, Page 20]",
+    "expected_section_id": "section_004",
+    "expected_chunk_ids": ["who_001_section_004_c001"],
+    "expected_pages": [20],
+    "topic": "Laboratory Testing",
+    "clinical_intent": "Verify the conditional recommendation on lab testing before treatment."
+  },
+  {
+    "query_id": "Q18",
+    "query": "Which specific laboratory tests are suggested before or during pharmacological treatment?",
+    "answer": "**Recommendation:** Suggested tests include serum electrolytes and creatinine, lipid panel, HbA1C or fasting glucose, urine dipstick, and electrocardiogram (ECG).\n\n**Excerpt:** \"Suggested tests include serum electrolytes and creatinine, lipid panel, HbA1C or fasting glucose, urine dipstick, and electrocardiogram (ECG).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.2, Page 20]",
+    "expected_section_id": "section_004",
+    "expected_chunk_ids": ["who_001_section_004_c002"],
+    "expected_pages": [20],
+    "topic": "Suggested Lab Tests",
+    "clinical_intent": "Verify the list of suggested laboratory investigations."
+  },
+  {
+    "query_id": "Q19",
+    "query": "What should be done if laboratory testing is not possible in low-resource or non-clinical settings?",
+    "answer": "**Recommendation:** In low-resourced areas or non-clinical settings where testing is not possible because of additional costs or lack of access to laboratories and ECG, treatment should not be delayed, and testing can be done subsequently.\n\n**Excerpt:** \"In low-resourced areas or non-clinical settings, where testing may not be possible because of additional costs, and lack of access to laboratories and ECG, treatment should not be delayed, and testing can be done subsequently.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.2, Page 20]",
+    "expected_section_id": "section_004",
+    "expected_chunk_ids": ["who_001_section_004_c002"],
+    "expected_pages": [20],
+    "topic": "Testing in Low-Resource Settings",
+    "clinical_intent": "Verify treatment should proceed without delay when testing unavailable."
+  },
+  {
+    "query_id": "Q20",
+    "query": "Which antihypertensive medicines are more suitable for initiation without laboratory testing?",
+    "answer": "**Recommendation:** Long-acting dihydropyridine calcium-channel blockers (CCBs) are more suitable for initiation without testing, compared to diuretics or angiotensin-converting enzyme inhibitors (ACEi)/angiotensin-II receptor blockers (ARBs).\n\n**Excerpt:** \"Some medicines, such as long-acting dihydropyridine calcium-channel blockers (CCBs) are more suitable for initiation without testing, compared to diuretics or angiotensin-converting enzyme inhibitors (ACEi)/angiotensin-II receptor blockers (ARBs).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.2, Page 20]",
+    "expected_section_id": "section_004",
+    "expected_chunk_ids": ["who_001_section_004_c002"],
+    "expected_pages": [20],
+    "topic": "Medicines Suitable Without Testing",
+    "clinical_intent": "Verify long-acting dihydropyridine CCBs can be initiated without testing."
+  },
+  {
+    "query_id": "Q21",
+    "query": "What is the prevalence of secondary hypertension among patients with a diagnosis of hypertension?",
+    "answer": "**Recommendation:** Studies suggest a prevalence of secondary hypertension of 5–10% among patients with a diagnosis of HTN, and a higher prevalence of 10–30% among patients with particularly high BP (e.g., over 175/115 mmHg) or BP resistant to treatment.\n\n**Excerpt:** \"In terms of secondary HTN, various studies suggest a prevalence of 5–10% among patients with a diagnosis of HTN and a higher prevalence of 10–30% among patients with particularly high BP (e.g. over 175/115 mmHg) or BP that is resistant to treatment\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.2, Page 21]",
+    "expected_section_id": "section_004",
+    "expected_chunk_ids": ["who_001_section_004_c003"],
+    "expected_pages": [21],
+    "topic": "Secondary Hypertension Prevalence",
+    "clinical_intent": "Verify prevalence estimates for secondary hypertension."
+  },
+  {
+    "query_id": "Q22",
+    "query": "What does WHO suggest regarding cardiovascular disease risk assessment in relation to initiation of antihypertensive treatment?",
+    "answer": "**Recommendation:** WHO suggests cardiovascular risk assessment at or after the initiation of pharmacological treatment for hypertension, but only where this is feasible and does not delay treatment. This is a conditional recommendation with low-certainty evidence.\n\n**Excerpt:** \"WHO suggests cardiovascular risk assessment at or after the initiation of pharmacological treatment for hypertension, but only where this is feasible and does not delay treatment. Conditional recommendation, low-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.3, Page 22]",
+    "expected_section_id": "section_005",
+    "expected_chunk_ids": ["who_001_section_005_c001"],
+    "expected_pages": [22],
+    "topic": "CVD Risk Assessment",
+    "clinical_intent": "Verify CVD risk assessment is suggested at/after initiation without delaying treatment."
+  },
+  {
+    "query_id": "Q23",
+    "query": "Do patients with systolic blood pressure of 140 mmHg or higher require cardiovascular risk assessment before starting treatment?",
+    "answer": "**Recommendation:** No. Most patients with SBP ≥140 or DBP ≥90 mmHg are already high risk and indicated for pharmacological treatment; they do not require cardiovascular risk assessment prior to initiating treatment.\n\n**Excerpt:** \"Most patients with SBP ≥140 or DBP ≥90 mmHg are high risk and indicated for pharmacological treatment; they do not require cardiovascular (CVD) risk assessment prior to initiating treatment.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.3, Page 22]",
+    "expected_section_id": "section_005",
+    "expected_chunk_ids": ["who_001_section_005_c001"],
+    "expected_pages": [22],
+    "topic": "Risk Assessment Not Required",
+    "clinical_intent": "Verify patients with SBP >=140 or DBP >=90 do not need risk assessment first."
+  },
+  {
+    "query_id": "Q24",
+    "query": "When is cardiovascular risk assessment most important for guiding treatment decisions?",
+    "answer": "**Recommendation:** CVD risk assessment is most important for guiding decisions about initiating pharmacological treatment in those with lower systolic blood pressure (130–139 mmHg).\n\n**Excerpt:** \"CVD risk assessment is most important for guiding decisions about initiating pharmacological treatment for hypertension (HTN) in those with lower SBP (130–139 mmHg).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.3, Page 22]",
+    "expected_section_id": "section_005",
+    "expected_chunk_ids": ["who_001_section_005_c001"],
+    "expected_pages": [22],
+    "topic": "Role of Risk Assessment",
+    "clinical_intent": "Verify risk assessment matters most at SBP 130-139 mmHg."
+  },
+  {
+    "query_id": "Q25",
+    "query": "Which three drug classes are recommended as first-line agents for adults with hypertension requiring pharmacological treatment?",
+    "answer": "**Recommendation:** WHO recommends use of drugs from any of three classes as initial treatment: (1) thiazide and thiazide-like agents, (2) angiotensin-converting enzyme inhibitors (ACEis)/angiotensin-receptor blockers (ARBs), and (3) long-acting dihydropyridine calcium channel blockers (CCBs). This is a strong recommendation with high-certainty evidence.\n\n**Excerpt:** \"For adults with hypertension requiring pharmacological treatment, WHO recommends the use of drugs from any of the following three classes of pharmacological antihypertensive medications as an initial treatment: 1. thiazide and thiazide-like agents 2. angiotensin-converting enzyme inhibitors (ACEis)/angiotensin-receptor blockers (ARBs) 3. long-acting dihydropyridine calcium channel blockers (CCBs). Strong recommendation, high-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 23]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c002"],
+    "expected_pages": [23],
+    "topic": "First-Line Drug Classes",
+    "clinical_intent": "Verify the three first-line drug classes."
+  },
+  {
+    "query_id": "Q26",
+    "query": "Are long-acting or short-acting antihypertensive agents preferred?",
+    "answer": "**Recommendation:** Long-acting antihypertensives are preferred.\n\n**Excerpt:** \"Long-acting antihypertensives are preferred.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 23]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c002"],
+    "expected_pages": [23],
+    "topic": "Long-Acting Preference",
+    "clinical_intent": "Verify preference for long-acting antihypertensives."
+  },
+  {
+    "query_id": "Q27",
+    "query": "What specific indications are given for choosing particular antihypertensive agents?",
+    "answer": "**Recommendation:** Examples include diuretics or CCBs in patients over 65 years or those of African descent, beta-blockers in ischaemic heart disease, and ACEis/ARBs in patients with severe proteinuria, diabetes mellitus, heart failure or kidney disease.\n\n**Excerpt:** \"Examples of indications to consider specific agents include diuretics or CCBs in patients over 65 years or those of African descent, beta-blockers in ischaemic heart disease, ACEis/ARBs in patients with severe proteinuria, diabetes mellitus, heart failure or kidney disease.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 23]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c002"],
+    "expected_pages": [23],
+    "topic": "Agent-Specific Indications",
+    "clinical_intent": "Verify patient-specific indications for choosing drug classes."
+  },
+  {
+    "query_id": "Q28",
+    "query": "What were the reductions in mortality per 1000 treated people for the various drug classes?",
+    "answer": "**Recommendation:** Mortality reduction per 1000 treated people was 3 for low-dose thiazide, 12 for high-dose thiazide, 23 for ACEi, 8 for CCB, 2 for beta-blockers, and 14 for ARBs.\n\n**Excerpt:** \"Mortality and major adverse cardiac events (MACE) reduction per 1000 treated people for the various classes were 3 and 14 (low-dose thiazide), 12 and 39 (high-dose thiazide), 23 and 48 (ACEi), 8 and 23 (CCB), 2 and 8 (beta-blockers) and 14 and no data for MACE (ARBs) respectively.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 23]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c002"],
+    "expected_pages": [23],
+    "topic": "Mortality Reduction by Class",
+    "clinical_intent": "Verify class-specific mortality reduction estimates per 1000 treated."
+  },
+  {
+    "query_id": "Q29",
+    "query": "What did the ALLHAT trial suggest about drug choice for individuals of African descent?",
+    "answer": "**Recommendation:** ALLHAT suggested greater BP reduction in individuals of African descent with chlorthalidone than with lisinopril, and that stroke was significantly less likely with the diuretic than with lisinopril in this group compared with those of Caucasian ethnicity.\n\n**Excerpt:** \"ALLHAT (Antihypertensive and Lipid-Lowering Treatment to Prevent Heart Attack Trial) suggested greater BP reduction in individuals of African descent with chlorthalidone than lisinopril, and that stroke was significantly less likely with the diuretic than with the lisinopril in this group of patients than in those of Caucasian ethnicity\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 24]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c003"],
+    "expected_pages": [24],
+    "topic": "ALLHAT Subgroup",
+    "clinical_intent": "Verify ALLHAT findings for African-descent patients."
+  },
+  {
+    "query_id": "Q30",
+    "query": "Why are beta-blockers not a clear first-choice agent for hypertension management?",
+    "answer": "**Recommendation:** The balance of benefits and harms was not as clear for beta-blockers as a first choice, and there were more stroke events with beta-blockers than with CCBs or ACEis/ARBs.\n\n**Excerpt:** \"This balance of benefits and harms was not as clear for beta-blockers as a first choice for HTN management. ... There were more stroke events with beta-blockers than CCBs or ACEis/ARBs.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.4, Page 24]",
+    "expected_section_id": "section_006",
+    "expected_chunk_ids": ["who_001_section_006_c003"],
+    "expected_pages": [24],
+    "topic": "Beta-Blockers Not First-Line",
+    "clinical_intent": "Verify the reasoning against beta-blockers as first choice."
+  },
+  {
+    "query_id": "Q31",
+    "query": "What does WHO suggest regarding combination therapy as initial treatment for hypertension?",
+    "answer": "**Recommendation:** WHO suggests combination therapy, preferably with a single-pill combination (to improve adherence and persistence), as an initial treatment. The medications used should be chosen from three classes: diuretics (thiazide or thiazide-like), ACEis/ARBs, and long-acting dihydropyridine CCBs. This is a conditional recommendation with moderate-certainty evidence.\n\n**Excerpt:** \"For adults with hypertension requiring pharmacological treatment, WHO suggests combination therapy, preferably with a single-pill combination (to improve adherence and persistence), as an initial treatment. Antihypertensive medications used in combination therapy should be chosen from the following three drug classes: diuretics (thiazide or thiazide-like), angiotensin-converting enzyme inhibitors (ACEis)/angiotensin-receptor blockers (ARBs), and long-acting dihydropyridine calcium channel blockers (CCBs). Conditional recommendation, moderate-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.5, Page 25]",
+    "expected_section_id": "section_007",
+    "expected_chunk_ids": ["who_001_section_007_c002"],
+    "expected_pages": [25],
+    "topic": "Combination Therapy",
+    "clinical_intent": "Verify recommendation for combination therapy, preferably single-pill."
+  },
+  {
+    "query_id": "Q32",
+    "query": "When is combination medication therapy especially valuable?",
+    "answer": "**Recommendation:** Combination medication therapy may be especially valuable when the baseline blood pressure is ≥20/10 mmHg higher than the target blood pressure.\n\n**Excerpt:** \"Combination medication therapy may be especially valuable when the baseline BP is ≥20/10 mmHg higher than the target blood pressure.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.5, Page 25]",
+    "expected_section_id": "section_007",
+    "expected_chunk_ids": ["who_001_section_007_c002"],
+    "expected_pages": [25],
+    "topic": "Combination Therapy Indication",
+    "clinical_intent": "Verify when combination therapy is especially valuable."
+  },
+  {
+    "query_id": "Q33",
+    "query": "What did the large Italian study find comparing initial two-drug combination vs monotherapy?",
+    "answer": "**Recommendation:** Propensity-score-adjusted analysis of a large nonrandomized study from Italy found that an initial two-drug single-pill or free combination was associated with significant reductions in the risk of death (20%) and hospitalization for cardiovascular events (16%) compared with initial monotherapy.\n\n**Excerpt:** \"A large nonrandomized study from Italy (125 635 patients, age 40–85 years) evaluated those who started antihypertensive treatment with one drug vs a two-drug single-pill or free combination. Propensity score adjusted analysis suggests that an initial two-drug single-pill or free combination was associated with significant reductions in the risk of death (20%, 11–28%) and hospitalization for cardiovascular events (16%, 10–21%) compared with initial monotherapy\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.5, Page 26]",
+    "expected_section_id": "section_007",
+    "expected_chunk_ids": ["who_001_section_007_c002"],
+    "expected_pages": [26],
+    "topic": "Combination vs Monotherapy Evidence",
+    "clinical_intent": "Verify the Italian study's reductions in death and CV hospitalization."
+  },
+  {
+    "query_id": "Q34",
+    "query": "How does single-pill combination therapy affect adherence and persistence compared with free-equivalent components?",
+    "answer": "**Recommendation:** A meta-analysis of 12 retrospective database studies found adherence, measured as mean difference in medication possession ratio, was 8–14% higher with a single-pill combination, and persistence was also twice as likely.\n\n**Excerpt:** \"Adherence, measured as the mean difference in medication possession ratio, was 8–14% higher with a single-pill combination. Persistence was also twice as likely\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.5, Page 26]",
+    "expected_section_id": "section_007",
+    "expected_chunk_ids": ["who_001_section_007_c003"],
+    "expected_pages": [26],
+    "topic": "Single-Pill Adherence",
+    "clinical_intent": "Verify adherence and persistence benefits of single-pill combinations."
+  },
+  {
+    "query_id": "Q35",
+    "query": "What are the rationale considerations for recommending combination therapy, particularly in a single-pill approach?",
+    "answer": "**Recommendation:** The rationale includes: most individuals with HTN will eventually require two or more agents; combination of two agents from complementary classes yields greater BP-reduction efficacy; lower doses of each agent reduce side-effects and complementary classes may mitigate side-effects; adherence and persistence are increased; and simplified logistics can lead to fewer stock-outs and reduced pharmacy inventory.\n\n**Excerpt:** \"most individuals with HTN will eventually require two or more antihypertensive agents to achieve BP control; the combination of two agents from complementary classes yields greater BP-reduction efficacy (at least equal to the sum of the efficacy of each chosen agent); lower doses of each agent are needed, which results in a reduction of side-effects and the fact that use of complementary classes of antihypertensive agents may mitigate the side-effects of each agent; adherence and persistence are increased; and simplified logistics can lead to fewer stock-outs and a reduced pharmacy inventory\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.5, Page 27]",
+    "expected_section_id": "section_007",
+    "expected_chunk_ids": ["who_001_section_007_c005"],
+    "expected_pages": [27],
+    "topic": "Combination Therapy Rationale",
+    "clinical_intent": "Verify the rationale for combination therapy."
+  },
+  {
+    "query_id": "Q36",
+    "query": "What is the recommended target blood pressure treatment goal in all patients with hypertension without comorbidities?",
+    "answer": "**Recommendation:** WHO recommends a target blood pressure treatment goal of <140/90 mmHg in all patients with hypertension without comorbidities. This is a strong recommendation with moderate-certainty evidence.\n\n**Excerpt:** \"WHO recommends a target blood pressure treatment goal of <140/90 mmHg in all patients with hypertension without comorbidities. Strong recommendation, moderate-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.6, Page 28]",
+    "expected_section_id": "section_008",
+    "expected_chunk_ids": ["who_001_section_008_c001"],
+    "expected_pages": [28],
+    "topic": "Target BP General",
+    "clinical_intent": "Verify target <140/90 mmHg without comorbidities."
+  },
+  {
+    "query_id": "Q37",
+    "query": "What is the recommended systolic blood pressure target in patients with hypertension and known cardiovascular disease?",
+    "answer": "**Recommendation:** WHO recommends a target systolic blood pressure treatment goal of <130 mmHg in patients with hypertension and known cardiovascular disease (CVD). This is a strong recommendation with moderate-certainty evidence.\n\n**Excerpt:** \"WHO recommends a target systolic blood pressure treatment goal of <130 mmHg in patients with hypertension and known cardiovascular disease (CVD). Strong recommendation, moderate-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.6, Page 28]",
+    "expected_section_id": "section_008",
+    "expected_chunk_ids": ["who_001_section_008_c001"],
+    "expected_pages": [28],
+    "topic": "Target BP CVD",
+    "clinical_intent": "Verify SBP target <130 mmHg in CVD patients."
+  },
+  {
+    "query_id": "Q38",
+    "query": "What is the recommended systolic blood pressure target in high-risk patients with hypertension (high CVD risk, diabetes mellitus, chronic kidney disease)?",
+    "answer": "**Recommendation:** WHO suggests a target systolic blood pressure treatment goal of <130 mmHg in high-risk patients with hypertension (those with high CVD risk, diabetes mellitus, chronic kidney disease). This is a conditional recommendation with moderate-certainty evidence.\n\n**Excerpt:** \"WHO suggests a target systolic blood pressure treatment goal of <130 mmHg in high-risk patients with hypertension (those with high CVD risk, diabetes mellitus, chronic kidney disease). Conditional recommendation, moderate-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.6, Page 28]",
+    "expected_section_id": "section_008",
+    "expected_chunk_ids": ["who_001_section_008_c001"],
+    "expected_pages": [28],
+    "topic": "Target BP High Risk",
+    "clinical_intent": "Verify SBP target <130 mmHg in high-risk patients."
+  },
+  {
+    "query_id": "Q39",
+    "query": "What does the evidence say about lower blood pressure targets in adults 65 years and older?",
+    "answer": "**Recommendation:** A systematic review by Murad et al. suggests treatment to a lower BP target in individuals 65 years or older leads to a significant reduction in all-cause and CVD mortality, chronic kidney disease, myocardial infarction, or stroke outcomes. However, the GDG cautions against applying this evidence to lower-risk patients not meeting the trial eligibility criteria for SPRINT, ACCORD or SPS3.\n\n**Excerpt:** \"Summary results from a systematic review focusing on adults 65 years and older by Murad et al (59). suggests that treatment to a lower BP target in individuals 65 years or older leads to a significant reduction in all-cause and CVD mortality, chronic kidney disease, myocardial infarction, or stroke outcomes. ... Therefore, the GDG cautions against applying this evidence to lower-risk patients with raised BP or HTN – specifically, those not meeting trial eligibility criteria for SPRINT, ACCORD or SPS3 (62).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.6, Page 28]",
+    "expected_section_id": "section_008",
+    "expected_chunk_ids": ["who_001_section_008_c001"],
+    "expected_pages": [28],
+    "topic": "Targets in Older Adults",
+    "clinical_intent": "Verify lower-target evidence in 65+ and the caution about lower-risk patients."
+  },
+  {
+    "query_id": "Q40",
+    "query": "How frequently should patients be followed up after initiation or a change in antihypertensive medications?",
+    "answer": "**Recommendation:** WHO suggests a monthly follow up after initiation or a change in antihypertensive medications until patients reach target. This is a conditional recommendation with low-certainty evidence.\n\n**Excerpt:** \"WHO suggests a monthly follow up after initiation or a change in antihypertensive medications until patients reach target. Conditional recommendation, low-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.7, Page 29]",
+    "expected_section_id": "section_009",
+    "expected_chunk_ids": ["who_001_section_009_c002"],
+    "expected_pages": [29],
+    "topic": "Follow-Up After Initiation",
+    "clinical_intent": "Verify monthly follow-up after initiation or change."
+  },
+  {
+    "query_id": "Q41",
+    "query": "How often should patients whose blood pressure is under control be followed up?",
+    "answer": "**Recommendation:** WHO suggests a follow up every 3–6 months for patients whose blood pressure is under control. This is a conditional recommendation with low-certainty evidence.\n\n**Excerpt:** \"WHO suggests a follow up every 3–6 months for patients whose blood pressure is under control. Conditional recommendation, low-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.7, Page 30]",
+    "expected_section_id": "section_009",
+    "expected_chunk_ids": ["who_001_section_009_c002"],
+    "expected_pages": [30],
+    "topic": "Follow-Up When Controlled",
+    "clinical_intent": "Verify 3-6 month follow-up for controlled BP."
+  },
+  {
+    "query_id": "Q42",
+    "query": "What did the UK population-based cohort study find about delay in initiating treatment or re-evaluation and cardiovascular risk?",
+    "answer": "**Recommendation:** In patients newly diagnosed with HTN, those with >1.4 months before initiation of treatment had a hazard ratio of 1.12 for a major adverse cardiovascular event (MACE) compared with those starting within 1.4 months. For those initiated on treatment, waiting >2.7 months before re-evaluation had a hazard ratio of 1.18 for MACE compared with reassessment within 2.7 months.\n\n**Excerpt:** \"in patients newly diagnosed with HTN, those with >1.4 months prior to initiation of treatment had a hazard ratio of 1.12 (1.05–1.20) for a major adverse cardiovascular event (MACE) compared to those who started treatment at <1.4 months. For patients who were initiated on treatment, those who waited >2.7 months before re-evaluation had a hazard ratio of 1.18 (1.11–1.25) for MACE compared to those reassessed at <2.7 months.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.7, Page 30]",
+    "expected_section_id": "section_009",
+    "expected_chunk_ids": ["who_001_section_009_c002"],
+    "expected_pages": [30],
+    "topic": "Delay and MACE Risk",
+    "clinical_intent": "Verify hazard ratios associated with delayed treatment/re-evaluation."
+  },
+  {
+    "query_id": "Q43",
+    "query": "Can nonphysician professionals such as pharmacists and nurses provide pharmacological treatment of hypertension?",
+    "answer": "**Recommendation:** Yes. WHO suggests that pharmacological treatment of hypertension can be provided by nonphysician professionals such as pharmacists and nurses, as long as these conditions are met: proper training, prescribing authority, specific management protocols, and physician oversight. This is a conditional recommendation with low-certainty evidence.\n\n**Excerpt:** \"WHO suggests that pharmacological treatment of hypertension can be provided by nonphysician professionals such as pharmacists and nurses, as long as the following conditions are met: proper training, prescribing authority, specific management protocols and physician oversight. Conditional recommendation, low-certainty evidence\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.8, Page 31]",
+    "expected_section_id": "section_010",
+    "expected_chunk_ids": ["who_001_section_010_c001"],
+    "expected_pages": [31],
+    "topic": "Nonphysician Professionals",
+    "clinical_intent": "Verify conditions for nonphysician-provided treatment."
+  },
+  {
+    "query_id": "Q44",
+    "query": "What tasks may community health care workers assist with in hypertension care?",
+    "answer": "**Recommendation:** Community health care workers (HCWs) may assist in tasks such as education, delivery of medications, blood pressure (BP) measurement, and monitoring through an established collaborative care model.\n\n**Excerpt:** \"Community health care workers (HCWs) may assist in tasks such as education, delivery of medications, blood pressure (BP) measurement and monitoring through an established collaborative care model.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.8, Page 31]",
+    "expected_section_id": "section_010",
+    "expected_chunk_ids": ["who_001_section_010_c001"],
+    "expected_pages": [31],
+    "topic": "Community HCW Roles",
+    "clinical_intent": "Verify tasks community health care workers may assist with."
+  },
+  {
+    "query_id": "Q45",
+    "query": "What did the systematic review by Greer et al. show about pharmacist-managed care?",
+    "answer": "**Recommendation:** Pharmacist-managed care led to better BP control (relative risk 1.44, or 170 more controlled per 1000) with no obviously reported difference in adherence, clinical events, or quality of life.\n\n**Excerpt:** \"A systematic review by Greer et al., showed that pharmacist-managed care led to better BP control (relative risk 1.44 or 170 more controlled per 1000) with no obviously reported difference in adherence, clinical events or quality of life\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 3.8, Page 31]",
+    "expected_section_id": "section_010",
+    "expected_chunk_ids": ["who_001_section_010_c001"],
+    "expected_pages": [31],
+    "topic": "Pharmacist-Managed Care",
+    "clinical_intent": "Verify pharmacist-managed care improved BP control."
+  },
+  {
+    "query_id": "Q46",
+    "query": "What is the opinion-based recommendation for target blood pressure and preferred medication in disaster-related hypertension?",
+    "answer": "**Recommendation:** The opinion-based recommendation is that the target BP control level should be less than 140 mmHg for SBP and less than 90 mmHg for DBP. Long-acting CCBs are preferred because they are metabolically neutral and best at reducing BP variability.\n\n**Excerpt:** \"Opinion-based recommendation is that the target BP control level should be less than 140 mmHg for SBP and less than 90 mmHg for DBP. According to Kario et al, long-acting CCBs are preferred because they are metabolically neutral, and best at reducing BP variability, which is an independent predictor of clinical outcomes, especially stroke.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 4.1, Page 33]",
+    "expected_section_id": "section_011",
+    "expected_chunk_ids": ["who_001_section_011_c001"],
+    "expected_pages": [33],
+    "topic": "Disaster Setting HTN",
+    "clinical_intent": "Verify opinion-based BP target and CCB preference in disaster settings."
+  },
+  {
+    "query_id": "Q47",
+    "query": "Should ACE inhibitors or ARBs be continued or discontinued in patients with COVID-19?",
+    "answer": "**Recommendation:** History of ACEi or ARB use was not found to be associated with increased severity of COVID-19 illness. Discontinuation of ACEis or ARBs may yield worse outcomes than continuation in patients with a diagnosis of COVID-19, and most of the world's professional societies recommend or strongly encourage continuing ACEis/ARBs in COVID-19-infected patients.\n\n**Excerpt:** \"After adjustment for confounders, history of ACEi or ARB use was not found to be associated with increased severity of COVID-19 illness. ... discontinuation of ACEis or ARBs may yield worse outcomes than continuation of their use in patients with a diagnosis of COVID-19. ... Most of the world's professional societies either recommend or strongly encourage continuing ACEis/ARBs in COVID-19-infected patients.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 4.2, Page 34]",
+    "expected_section_id": "section_011",
+    "expected_chunk_ids": ["who_001_section_011_c003"],
+    "expected_pages": [34],
+    "topic": "ACEi/ARB in COVID-19",
+    "clinical_intent": "Verify ACEi/ARB continuation recommendation in COVID-19."
+  },
+  {
+    "query_id": "Q48",
+    "query": "At what blood pressure levels is hypertension in pregnancy diagnosed and when should pharmacologic treatment be initiated?",
+    "answer": "**Recommendation:** HTN in pregnancy is generally diagnosed when BP is ≥140 mmHg and/or ≥90 mmHg on at least two occasions at least six hours apart. For both chronic and gestational HTN, pharmacologic treatment is generally initiated when SBP is ≥160 mmHg and/or DBP is ≥105 mmHg. If target organ damage is present, initiating treatment at a DBP of ≥90 mmHg should be considered.\n\n**Excerpt:** \"HTN in pregnancy is generally diagnosed when BP is ≥140 mmHg and/or ≥90 mmHg on at least two occasions, at least six hours apart. ... it is generally recommended for both chronic and gestational HTN that pharmacologic treatment be initiated when the SBP is ≥160 mmHg and/or the DBP is ≥105 mmHg. ... If target organ damage is present, initiating antihypertensive pharmacological treatment at a DBP of ≥90 mmHg should be considered.\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 4.3, Page 34]",
+    "expected_section_id": "section_011",
+    "expected_chunk_ids": ["who_001_section_011_c004"],
+    "expected_pages": [34],
+    "topic": "HTN in Pregnancy",
+    "clinical_intent": "Verify diagnostic and treatment thresholds in pregnancy."
+  },
+  {
+    "query_id": "Q49",
+    "query": "Which medications are preferred for hypertension in pregnancy and which are contraindicated?",
+    "answer": "**Recommendation:** Preferred medications include methyldopa, beta-blockers (particularly labetalol), CCBs (particularly nifedipine and, as an alternative, verapamil), and the direct-acting vasodilators (particularly hydralazine). Contraindicated agents include all renin–angiotensin system inhibitors (ACEis, ARBs, and direct-acting renin inhibitors), the mineralocorticoid receptor antagonist spironolactone, and the beta-blocker atenolol.\n\n**Excerpt:** \"preferred medications include methyldopa, beta-blockers (particularly labetalol), CCBs (particularly nifedipine and, as an alternative, verapamil), and the direct-acting vasodilators (particularly hydralazine). ... These include all the renin–angiotensin system inhibitors, such as the ACEis, the ARBs and ... the direct-acting renin inhibitors, due to direct adverse effects on the fetus, and the mineralocorticoid receptor antagonist spironolactone due to fetal anti-androgen effects. The use of the beta-blocker atenolol is also contraindicated due to the observation of intrauterine fetal growth inhibition\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 4.3, Page 35]",
+    "expected_section_id": "section_011",
+    "expected_chunk_ids": ["who_001_section_011_c005"],
+    "expected_pages": [35],
+    "topic": "Pregnancy Medications",
+    "clinical_intent": "Verify preferred and contraindicated antihypertensives in pregnancy."
+  },
+  {
+    "query_id": "Q50",
+    "query": "What do the drug- and dose-specific protocols (Algorithm 1 and Algorithm 2) recommend for starting treatment?",
+    "answer": "**Recommendation:** Algorithm 1 (single-pill combination) starts an ARB–CCB at half-maximal doses (e.g., Telmisartan 40 mg–Amlodipine 5 mg once a day), doubling to full dose if BP is not at goal, then adding a thiazide/thiazide-like diuretic (hydrochlorothiazide 25 mg or chlorthalidone 12.5 mg once a day) and doubling it if needed, with referral to a specialist if still not at goal. Algorithm 2 (monotherapy) starts a CCB (Amlodipine 5 mg), then adds an ARB (e.g., Telmisartan 40 mg) and titrates. Beginning treatment with two drugs from different classes is recommended when baseline BP is ≥20/10 mmHg above goal, and should be considered when baseline BP is ≥140/90 mmHg. Potassium and kidney function should be monitored when starting or changing ACEi/ARB or thiazide/thiazide-like diuretics.\n\n**Excerpt:** \"Beginning treatment with two antihypertensive drugs from different classes is recommended when baseline BP is ≥20/10 mmHg above goal, and should be considered when baseline BP is ≥140/90 mmHg. ... Start ARB–CCB at half-maximal doses (Example: Telmisartan 40–Amlodipine 5 mg once a day). ... If BP is not at goal, increase ARB–CCB (double the dose to Telmisartan 80–Amlodipine 10 mg once a day). If BP is not at goal, add a thiazide/thiazide-like diuretic at half-maximal dose (hydrochlorothiazide 25 mg or chlorthalidone 12.5 mg once a day).\"\n\n**Citation:** [WHO Guideline for the Pharmacological Treatment of Hypertension in Adults, Section 6.2, Page 40]",
+    "expected_section_id": "section_013",
+    "expected_chunk_ids": ["who_001_section_013_c001", "who_001_section_013_c002"],
+    "expected_pages": [40, 41],
+    "topic": "Treatment Protocols",
+    "clinical_intent": "Verify the algorithm-based drug and dose titration protocols."
+  }
+]
